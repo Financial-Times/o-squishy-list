@@ -39,13 +39,21 @@ function PrioritisedContentFilter(rootEl, opts) {
     function getPrioritySortedChildNodeEls() {
         allItemEls = getItemEls();
         prioritySortedItemEls = [];
+        var unprioritisedItemEls = [];
         for (var c = 0, l = allItemEls.length; c < l; c++) {
-            var thisChildEl = allItemEls[c],
-                thisChildPriority = getElPriority(thisChildEl) || 99;
-            if (!Array.isArray(prioritySortedItemEls[thisChildPriority])) {
-                prioritySortedItemEls[thisChildPriority] = [];
+            var thisItemEl = allItemEls[c],
+                thisItemPriority = getElPriority(thisItemEl);
+            if (isNaN(thisItemPriority)) {
+                unprioritisedItemEls.push(thisItemEl);
+            } else {
+                if (!Array.isArray(prioritySortedItemEls[thisItemPriority])) {
+                    prioritySortedItemEls[thisItemPriority] = [];
+                }
+                prioritySortedItemEls[thisItemPriority].push(thisItemEl);
             }
-            prioritySortedItemEls[thisChildPriority].push(thisChildEl);
+        }
+        if (unprioritisedItemEls.length > 0) {
+            prioritySortedItemEls.push(unprioritisedItemEls);
         }
         prioritySortedItemEls = prioritySortedItemEls.filter(function(v) {
             return v !== undefined;

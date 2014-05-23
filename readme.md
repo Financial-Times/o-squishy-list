@@ -13,7 +13,7 @@ Priority numbers do not have to start from 1 or be consecutive: the values `20`,
 
 Where multiple items share the same priority number, they will be hidden or shown at the same time. This allows declarative configuration of the behaviour - either all items hiding and showing at once, or each item hiding and showing individually - or a combination of the two.
 
-If an item doesn't not have a `data-priority` attribute, then it will be given a priority of `99`. Therefore if no items have the attribute, they will all hide and show together.
+If an item doesn't not have a `data-priority` attribute, then it will be treated as lower priority than the lowest explicitly-set priority. Therefore if no items have the attribute, they will _all_ hide and show together.
 
 An example with four items using three levels of priority:
 
@@ -25,6 +25,8 @@ An example with four items using three levels of priority:
     <li>Low priority item</li>
 </ul>
 ```
+
+In this example, the last item is in effect treated as priority `3`.
 
 ## Styling
 
