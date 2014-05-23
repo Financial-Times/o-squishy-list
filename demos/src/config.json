@@ -1,0 +1,12 @@
+{
+    "options": {
+    },
+    "demos": [
+        {
+            "name": "dropoff",
+            "template": "demos/src/dropoff.mustache",
+            "sass": "demos/src/demo.scss",
+            "js": "demos/src/demo.js"
+        }
+    ]
+}

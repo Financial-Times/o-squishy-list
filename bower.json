@@ -1,0 +1,8 @@
+{
+    "name": "o-prioritised-content-filter",
+    "main": [
+        "main.js"
+    ],
+    "dependencies": {
+    }
+}

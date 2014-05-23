@@ -1,0 +1,21 @@
+{
+    "description": "Prioritised content filter",
+    "origamiType": "module",
+    "origamiVersion": 1,
+    "support": "",
+    "supportStatus": "active",
+    "browserFeatures": {
+        "required": [],
+        "optional": []
+    },
+    "ci": {
+        "travis": "https://api.travis-ci.org/repos/Financial-Times/o-prioritised-content-filter/builds.json"
+    },
+    "demos": [
+        {
+            "path": "/demos/dropoff.html",
+            "expanded": true,
+            "description": ""
+        }
+    ]
+}
