@@ -40,7 +40,7 @@ describe("oPrioritisedContentFilter behaviour", function() {
 
     it("all items without priority are hidden first", function() {
         pcfEl.style.width = "850px";
-        testPCF.hideEnoughToFit();
+        testPCF.filter();
         expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(2);
         expect(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]').length).toEqual(2);
         expect(pcfLastEvent).toBeTruthy();
@@ -51,7 +51,7 @@ describe("oPrioritisedContentFilter behaviour", function() {
 
     it("all priority 3 and lower items are hidden next", function() {
         pcfEl.style.width = "650px";
-        testPCF.hideEnoughToFit();
+        testPCF.filter();
         expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(4);
         expect(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]').length).toEqual(2);
         expect(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]').length).toEqual(2);
@@ -63,7 +63,7 @@ describe("oPrioritisedContentFilter behaviour", function() {
 
     it("all priority 2 and lower items are hidden next", function() {
         pcfEl.style.width = "350px";
-        testPCF.hideEnoughToFit();
+        testPCF.filter();
         expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(7);
         expect(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]').length).toEqual(2);
         expect(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]').length).toEqual(2);
@@ -77,10 +77,10 @@ describe("oPrioritisedContentFilter behaviour", function() {
 
     it("all items are re-shown when size allows", function() {
         pcfEl.style.width = "650px";
-        testPCF.hideEnoughToFit();
+        testPCF.filter();
         expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(4);
         pcfEl.style.width = "1000px";
-        testPCF.hideEnoughToFit();
+        testPCF.filter();
         expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(0);
         expect(pcfLastEvent).toBeTruthy();
         expect(pcfLastEvent.hiddenItems.length).toEqual(0);

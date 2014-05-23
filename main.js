@@ -1,12 +1,13 @@
 /*global module*/
 
-function PrioritisedContentFilter(rootEl) {
+function PrioritisedContentFilter(rootEl, opts) {
     "use strict";
 
     var allItemEls,
         prioritySortedItemEls,
         hiddenItemEls,
-        debounceTimeout;
+        debounceTimeout,
+        options = opts || { filterOnResize: true };
 
     function dispatchCustomEvent(name, data) {
         if (document.createEvent && rootEl.dispatchEvent) {
@@ -66,17 +67,16 @@ function PrioritisedContentFilter(rootEl) {
     }
 
     function doesContentFit() {
-        // Loop through items, adding up offsetWidths
         var visibleItemsWidth = 0;
         for (var c = 0, l = allItemEls.length; c < l; c++) {
             if (!allItemEls[c].hasAttribute('aria-hidden')) {
-                visibleItemsWidth += allItemEls[c].offsetWidth;
+                visibleItemsWidth += allItemEls[c].offsetWidth; // Needs to take into account margins too
             }
         }
         return visibleItemsWidth <= rootEl.clientWidth;
     }
 
-    function hideEnoughToFit() {
+    function filter() {
         showAllElements();
         if (!doesContentFit()) {
             for (var p = prioritySortedItemEls.length - 1; p >= 0; p--) {
@@ -89,21 +89,28 @@ function PrioritisedContentFilter(rootEl) {
         dispatchCustomEvent('oPrioritisedContentFilter.change', { hiddenItems: hiddenItemEls });
     }
 
+    function resizeHandler() {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(filter, 50);
+    }
+
     function destroy() {
         for (var c = 0, l = allItemEls.length; c < l; c++) {
             allItemEls[c].removeAttribute('aria-hidden');
         }
+        window.removeEventListener('resize', resizeHandler, false);
     }
 
     getPrioritySortedChildNodeEls();
-    hideEnoughToFit();
-    window.addEventListener('resize', function() {
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(hideEnoughToFit, 50);
-    }, false);
+    filter();
+    if (options.filterOnResize) {
+        window.addEventListener('resize', resizeHandler, false);
+    }
 
-    this.hideEnoughToFit = hideEnoughToFit;
+    this.filter = filter;
     this.destroy = destroy;
+
+    dispatchCustomEvent('oPrioritisedContentFilter.ready');
 
 }
 

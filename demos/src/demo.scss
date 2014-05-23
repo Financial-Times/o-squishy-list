@@ -1,14 +1,11 @@
 
 .drop-off {
   outline: 2px dotted red;
-  position: relative;
   margin: 0 20px;
   padding: 0;
   max-width: 1400px;
   max-height: 100px;
   background-color: #fdd;
-  font-family: BentonSans, Helvetica, Arial, Sans-serif;
-  font-size: 16px;
   overflow: hidden;
 
   &.inlineBlock li {
@@ -33,10 +30,6 @@
   }
 
   li:not([data-priority]) {
-    background-color: #000;
-  }
-
-  li[data-priority='99'] {
     background-color: #333;
   }
 
