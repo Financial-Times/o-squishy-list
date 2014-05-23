@@ -7,9 +7,11 @@ Hides lowest priority items when space does not allow.
 
 Given a root HTML element, __o-prioritised-content-filter__ will assume each immediate element child is a _content item_. 
 
-The _content items_ should be given a `data-priority` attribute containing a positive integer to indicate its priority with regard to display. Low-priority items will be hidden first, high-priority items will be hidden last.
+The _content items_ should be given a `data-priority` attribute containing a positive integer to indicate its priority with regard to display. The lower the number the higher the priority. Low-priority items will be hidden first, high-priority items will be hidden last.
 
-Where multiple items share the same priority number, they will be hidden or shown at the same time.
+Priority numbers do not have to start from 1 or be consecutive: the values `20`, `34`, `80` are valid and express the same relative priorities as `1`, `2`, `3`.
+
+Where multiple items share the same priority number, they will be hidden or shown at the same time. This allows declarative configuration of the behaviour - either all items hiding and showing at once, or each item hiding and showing individually - or a combination of the two.
 
 If an item doesn't not have a `data-priority` attribute, then it will be given a priority of `99`. Therefore if no items have the attribute, they will all hide and show together.
 
@@ -47,9 +49,20 @@ A optional second argument can be passed, containing a configuration object, wit
 
 * `filterOnResize` (boolean, default `true`) - if `true` will listen for the `window.resize` event and automatically call `.filter()`
 
-## Core experience
+### Primary and core experience
 
-It is recommended to style content items so that they can all be accessible when they are shown - e.g. via wrapping or scrolling.
+When the JS has run, a `data-o-prioritised-content-filter-js` attribute will be set on the root element. This can be used to in CSS selectors to target primary or core.
+
+For core experience, it is recommended to style content items so that they can all be accessible when they are shown - e.g. via wrapping or scrolling.
+
+The `data-priority` attributes could also be used in CSS selectors if you wanted to only show high-priority items in the core experience:
+
+```css
+nav li:not([data-priority='1']) {
+    display: none;
+}
+```
+
 
 ## Javascript
 

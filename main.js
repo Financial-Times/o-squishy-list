@@ -99,8 +99,10 @@ function PrioritisedContentFilter(rootEl, opts) {
             allItemEls[c].removeAttribute('aria-hidden');
         }
         window.removeEventListener('resize', resizeHandler, false);
+        rootEl.removeAttribute('data-o-prioritised-content-filter-js');
     }
 
+    rootEl.setAttribute('data-o-prioritised-content-filter-js', '');
     getPrioritySortedChildNodeEls();
     filter();
     if (options.filterOnResize) {
