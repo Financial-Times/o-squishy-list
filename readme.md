@@ -34,7 +34,23 @@ The root element should have minimum and maximum widths set.
 
 In order to calculate the total width required, items must be set to `display: inline-block` or `float: left`.
 
-## Construction
+### Primary and core experience
+
+When the JS has run, a `data-o-prioritised-content-filter-js` attribute will be set on the root element. This can be used to in CSS selectors to target primary or core.
+
+For core experience, it is recommended to style content items so that they can all be accessible when they are shown - e.g. via wrapping or scrolling.
+
+The `data-priority` attributes could also be used in CSS selectors if you wanted to only show high-priority items in the core experience:
+
+```css
+nav li:not([data-priority='1']) {
+    display: none;
+}
+```
+
+## Javascript
+
+### Construction
 
 No code will run automatically.
 
@@ -50,23 +66,6 @@ var nav = new oPrioritisedContentFilter(document.getElementsByTagName('ul'));
 A optional second argument can be passed, containing a configuration object, with the following possible properties:
 
 * `filterOnResize` (boolean, default `true`) - if `true` will listen for the `window.resize` event and automatically call `.filter()`
-
-### Primary and core experience
-
-When the JS has run, a `data-o-prioritised-content-filter-js` attribute will be set on the root element. This can be used to in CSS selectors to target primary or core.
-
-For core experience, it is recommended to style content items so that they can all be accessible when they are shown - e.g. via wrapping or scrolling.
-
-The `data-priority` attributes could also be used in CSS selectors if you wanted to only show high-priority items in the core experience:
-
-```css
-nav li:not([data-priority='1']) {
-    display: none;
-}
-```
-
-
-## Javascript
 
 ### Methods
 
