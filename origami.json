@@ -13,7 +13,12 @@
     },
     "demos": [
         {
-            "path": "/demos/dropoff.html",
+            "path": "/demos/without-more.html",
+            "expanded": true,
+            "description": ""
+        },
+        {
+            "path": "/demos/with-more.html",
             "expanded": true,
             "description": ""
         }

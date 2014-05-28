@@ -1,22 +1,16 @@
 
 .drop-off {
-  outline: 2px dotted red;
   margin: 0 20px;
   padding: 0;
-  max-width: 1400px;
+  max-width: 950px;
   max-height: 100px;
+  font-family: sans-serif;
+  font-size: 14px;
   background-color: #fdd;
   overflow: hidden;
 
-  &.inlineBlock li {
-    display: inline-block;
-  }
-
-  &.floated li {
-    float: left;
-  }
-
   li {
+    display: inline-block;
     margin: 0;
     padding: 0 20px;
     list-style-type: none;
@@ -43,6 +37,11 @@
 
   li[data-priority='1'] {
     background-color: #bbb;
+  }
+
+  li[data-more] {
+    font-weight: bold;
+    background-color: #833;
   }
 
 }

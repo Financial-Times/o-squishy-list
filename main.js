@@ -6,6 +6,8 @@ function PrioritisedContentFilter(rootEl, opts) {
     var allItemEls,
         prioritySortedItemEls,
         hiddenItemEls,
+        moreEl,
+        moreWidth = 0,
         debounceTimeout,
         options = opts || { filterOnResize: true };
 
@@ -30,6 +32,18 @@ function PrioritisedContentFilter(rootEl, opts) {
             }
         }
         return itemEls;
+    }
+
+    function showEl(el) {
+        if (el) {
+            el.removeAttribute('aria-hidden');
+        }
+    }
+
+    function hideEl(el) {
+        if (el) {
+            el.setAttribute('aria-hidden', 'true');
+        }
     }
 
     function getElPriority(el) {
@@ -63,33 +77,39 @@ function PrioritisedContentFilter(rootEl, opts) {
     function showAllElements() {
         hiddenItemEls = [];
         for (var c = 0, l = allItemEls.length; c < l; c++) {
-            allItemEls[c].removeAttribute('aria-hidden');
+            showEl(allItemEls[c]);
         }
     }
 
     function hideElements(els) {
         hiddenItemEls = hiddenItemEls.concat(els);
         for (var c = 0, l = els.length; c < l; c++) {
-            els[c].setAttribute('aria-hidden', 'true');
+            hideEl(els[c]);
         }
     }
 
-    function doesContentFit() {
+    function getVisibleContentWidth() {
         var visibleItemsWidth = 0;
         for (var c = 0, l = allItemEls.length; c < l; c++) {
             if (!allItemEls[c].hasAttribute('aria-hidden')) {
                 visibleItemsWidth += allItemEls[c].offsetWidth; // Needs to take into account margins too
             }
         }
-        return visibleItemsWidth <= rootEl.clientWidth;
+        return visibleItemsWidth;
+    }
+
+    function doesContentFit() {
+        return getVisibleContentWidth() <= rootEl.clientWidth;
     }
 
     function filter() {
         showAllElements();
+        hideEl(moreEl);
         if (!doesContentFit()) {
             for (var p = prioritySortedItemEls.length - 1; p >= 0; p--) {
                 hideElements(prioritySortedItemEls[p]);
-                if (doesContentFit()) {
+                if ((getVisibleContentWidth() + moreWidth) <= rootEl.clientWidth) {
+                    showEl(moreEl);
                     break;
                 }
             }
@@ -110,12 +130,22 @@ function PrioritisedContentFilter(rootEl, opts) {
         rootEl.removeAttribute('data-o-prioritised-content-filter-js');
     }
 
-    rootEl.setAttribute('data-o-prioritised-content-filter-js', '');
-    getPrioritySortedChildNodeEls();
-    filter();
-    if (options.filterOnResize) {
-        window.addEventListener('resize', resizeHandler, false);
+    function init() {
+        rootEl.setAttribute('data-o-prioritised-content-filter-js', '');
+        getPrioritySortedChildNodeEls();
+        moreEl = rootEl.querySelector('[data-more]');
+        if (moreEl) {
+            showEl(moreEl);
+            moreWidth = moreEl.offsetWidth;
+            hideEl(moreEl);
+        }
+        filter();
+        if (options.filterOnResize) {
+            window.addEventListener('resize', resizeHandler, false);
+        }
     }
+
+    init();
 
     this.filter = filter;
     this.destroy = destroy;

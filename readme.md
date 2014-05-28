@@ -28,6 +28,22 @@ An example with four items using three levels of priority:
 
 In this example, the last item is in effect treated as priority `3`.
 
+### More
+
+If some cases you might want a 'more' item which will only show when content has been hidden due to insufficient space. Simply add another `<li>` with a `data-more` attribute. It should also have a `aria-hidden="true"` attribute:
+
+```html
+<ul>
+    <li data-priority="2">Medium priority item</li>
+    <li data-priority="1">High priority item</li>
+    <li data-priority="2">Medium priority item</li>
+    <li>Low priority item</li>
+    <li data-more aria-hidden="true">More</li>
+</ul>
+```
+
+When a _More_ item is present, sufficient _content items_ will be hidden to make space for it to show. The width of the _More_ item should not be allowed to change, as only the initial width is used for the content filtering calculations.
+
 ## Styling
 
 The root element should have minimum and maximum widths set.
@@ -36,7 +52,7 @@ In order to calculate the total width required, items must be set to `display: i
 
 ### Primary and core experience
 
-When the JS has run, a `data-o-prioritised-content-filter-js` attribute will be set on the root element. This can be used to in CSS selectors to target primary or core.
+When the JS has run, a `data-o-prioritised-content-filter-js` attribute will be set on the root element. This can be used in CSS selectors to target primary or core.
 
 For core experience, it is recommended to style content items so that they can all be accessible when they are shown - e.g. via wrapping or scrolling.
 

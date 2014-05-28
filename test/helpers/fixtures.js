@@ -24,27 +24,31 @@ function insert(html) {
     sandboxEl.innerHTML = html;
 }
 
-function insertSimple() {
-    "use strict";
-    var html = [
+function getStyles() {
+    return [
         '<style>',
         'ul {',
-            'margin: 0;',
-            'padding: 0;',
-            'white-space: nowrap;',
-            'width: 1000px;',
+        'margin: 0;',
+        'padding: 0;',
+        'white-space: nowrap;',
+        'width: 1000px;',
         '}',
         'li {',
-            'display: inline-block;',
-            'margin: 0;',
-            'padding: 0;',
-            'width: 100px;',
-            'list-style-type: none;',
+        'display: inline-block;',
+        'margin: 0;',
+        'padding: 0;',
+        'width: 100px;',
+        'list-style-type: none;',
         '}',
         'li[aria-hidden=true] {',
-            'display: none;',
+        'display: none;',
         '}',
-        '</style>',
+        '</style>'].join('');
+}
+
+function insertWithoutMore() {
+    "use strict";
+    var html = [
         '<ul>',
             '<li data-priority="2">P2</li>',
             '<li data-priority="1">P1</li>',
@@ -57,8 +61,28 @@ function insertSimple() {
             '<li data-priority="2">P2</li>',
         '</ul>'
     ];
-    insert(html.join(''));
+    insert(getStyles() + html.join(''));
 }
 
-exports.insertSimple = insertSimple;
+function insertWithMore() {
+    "use strict";
+    var html = [
+        '<ul>',
+        '<li data-priority="2">P2</li>',
+        '<li data-priority="1">P1</li>',
+        '<li data-priority="3">P3</li>',
+        '<li>NP</li>',
+        '<li data-priority="2">P2</li>',
+        '<li data-priority="1">P1</li>',
+        '<li data-priority="3">P3</li>',
+        '<li>NP</li>',
+        '<li data-priority="2">P2</li>',
+        '<li data-more aria-hidden="true">P2</li>',
+        '</ul>'
+    ];
+    insert(getStyles() + html.join(''));
+}
+
+exports.insertWithoutMore = insertWithoutMore;
+exports.insertWithMore = insertWithMore;
 exports.reset = reset;
