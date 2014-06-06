@@ -74,14 +74,14 @@ function PrioritisedContentFilter(rootEl, opts) {
         });
     }
 
-    function showAllElements() {
+    function showAllItems() {
         hiddenItemEls = [];
         for (var c = 0, l = allItemEls.length; c < l; c++) {
             showEl(allItemEls[c]);
         }
     }
 
-    function hideElements(els) {
+    function hideItems(els) {
         hiddenItemEls = hiddenItemEls.concat(els);
         for (var c = 0, l = els.length; c < l; c++) {
             hideEl(els[c]);
@@ -102,19 +102,28 @@ function PrioritisedContentFilter(rootEl, opts) {
         return getVisibleContentWidth() <= rootEl.clientWidth;
     }
 
+    function getRemainingItems() {
+        return allItemEls.filter(function(el) {
+            return hiddenItemEls.indexOf(el) === -1;
+        });
+    }
+
     function filter() {
-        showAllElements();
+        showAllItems();
         hideEl(moreEl);
         if (!doesContentFit()) {
             for (var p = prioritySortedItemEls.length - 1; p >= 0; p--) {
-                hideElements(prioritySortedItemEls[p]);
+                hideItems(prioritySortedItemEls[p]);
                 if ((getVisibleContentWidth() + moreWidth) <= rootEl.clientWidth) {
                     showEl(moreEl);
                     break;
                 }
             }
         }
-        dispatchCustomEvent('oPrioritisedContentFilter.change', { hiddenItems: hiddenItemEls });
+        dispatchCustomEvent('oPrioritisedContentFilter.change', {
+            hiddenItems: hiddenItemEls,
+            remainingItems: getRemainingItems()
+        });
     }
 
     function resizeHandler() {

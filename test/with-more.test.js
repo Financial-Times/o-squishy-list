@@ -101,6 +101,14 @@ describe("oPrioritisedContentFilter behaviour with More", function() {
             expect(pcfLastEvent.hiddenItems.length).toEqual(2);
             expect(pcfLastEvent.hiddenItems[0]).toEqual(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]')[0]);
             expect(pcfLastEvent.hiddenItems[1]).toEqual(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]')[1]);
+            expect(pcfLastEvent.remainingItems.length).toEqual(7);
+            expect(pcfLastEvent.remainingItems[0]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[0]);
+            expect(pcfLastEvent.remainingItems[1]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[1]);
+            expect(pcfLastEvent.remainingItems[2]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[2]);
+            expect(pcfLastEvent.remainingItems[3]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[3]);
+            expect(pcfLastEvent.remainingItems[4]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[4]);
+            expect(pcfLastEvent.remainingItems[5]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[5]);
+            expect(pcfLastEvent.remainingItems[6]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[6]);
         });
 
         it("When priority 3 and lower items are hidden", function() {
@@ -110,6 +118,12 @@ describe("oPrioritisedContentFilter behaviour with More", function() {
             expect(pcfLastEvent.hiddenItems.length).toEqual(4);
             expect(pcfLastEvent.hiddenItems[2]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[0]);
             expect(pcfLastEvent.hiddenItems[3]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[1]);
+            expect(pcfLastEvent.remainingItems.length).toEqual(5);
+            expect(pcfLastEvent.remainingItems[0]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[0]);
+            expect(pcfLastEvent.remainingItems[1]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[1]);
+            expect(pcfLastEvent.remainingItems[2]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[2]);
+            expect(pcfLastEvent.remainingItems[3]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[3]);
+            expect(pcfLastEvent.remainingItems[4]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[4]);
         });
 
         it("When priority 2 and lower items are hidden", function() {
@@ -120,6 +134,9 @@ describe("oPrioritisedContentFilter behaviour with More", function() {
             expect(pcfLastEvent.hiddenItems[4]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
             expect(pcfLastEvent.hiddenItems[5]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[1]);
             expect(pcfLastEvent.hiddenItems[6]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[2]);
+            expect(pcfLastEvent.remainingItems.length).toEqual(2);
+            expect(pcfLastEvent.remainingItems[0]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[0]);
+            expect(pcfLastEvent.remainingItems[1]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[1]);
         });
 
         it("When all items are re-shown", function() {
@@ -129,6 +146,16 @@ describe("oPrioritisedContentFilter behaviour with More", function() {
             testPCF.filter();
             expect(pcfLastEvent).toBeTruthy();
             expect(pcfLastEvent.hiddenItems.length).toEqual(0);
+            expect(pcfLastEvent.remainingItems.length).toEqual(9);
+            expect(pcfLastEvent.remainingItems[0]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[0]);
+            expect(pcfLastEvent.remainingItems[1]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[1]);
+            expect(pcfLastEvent.remainingItems[2]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[2]);
+            expect(pcfLastEvent.remainingItems[3]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[3]);
+            expect(pcfLastEvent.remainingItems[4]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[4]);
+            expect(pcfLastEvent.remainingItems[5]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[5]);
+            expect(pcfLastEvent.remainingItems[6]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[6]);
+            expect(pcfLastEvent.remainingItems[7]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[7]);
+            expect(pcfLastEvent.remainingItems[8]).toEqual(pcfEl.querySelectorAll(':not([aria-hidden="true"])')[8]);
         });
 
     });
