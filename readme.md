@@ -93,12 +93,13 @@ A optional second argument can be passed, containing a configuration object, wit
 This module will dispatch the following events on its root element:
 
 * `oPrioritisedContentFilter.ready` - when the object has constructed.
-* `oPrioritisedContentFilter.change` - when the item(s) in view change - e.g. items have been hidden or shown.
-    * The `detail.hiddenItems` property of the event object will contain an array of the hidden item elements. This will be an empty array when all items are shown.
+* `oPrioritisedContentFilter.change` - when the item(s) in view change - e.g. items have been hidden or shown. The event object will contain the following properties:
+    * `detail.hiddenItems` - array of the hidden item elements. This will be an empty array when all items are shown. The _more_ item will not be included in this array.
+    * `detail.remainingItems` - array of the remaining item elements. This will be an empty array when all items are hidden. The _more_ item will not be included in this array.
 
 A common use-case for this module is a variable-width navigation, where as the available space narrows, navigation items 'drop off' and are added to an expanded 'drop-down' menu.
 
-To achieve this, products should listen to the `oPrioritisedContentFilter.change` event, and use the included list of hidden items to determine what to add to the expandable drop-down menu - which should be outside the __o-prioritised-content-filter__ root element.
+To achieve this, products should listen to the `oPrioritisedContentFilter.change` event, and use the included list of hidden items to determine what to add to the expandable drop-down menu.
 
 For example:
 
