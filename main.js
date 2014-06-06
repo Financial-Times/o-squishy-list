@@ -102,6 +102,10 @@ function PrioritisedContentFilter(rootEl, opts) {
         return getVisibleContentWidth() <= rootEl.clientWidth;
     }
 
+    function getHiddenItems() {
+        return hiddenItemEls;
+    }
+
     function getRemainingItems() {
         return allItemEls.filter(function(el) {
             return hiddenItemEls.indexOf(el) === -1;
@@ -121,7 +125,7 @@ function PrioritisedContentFilter(rootEl, opts) {
             }
         }
         dispatchCustomEvent('oPrioritisedContentFilter.change', {
-            hiddenItems: hiddenItemEls,
+            hiddenItems: getHiddenItems(),
             remainingItems: getRemainingItems()
         });
     }
@@ -156,6 +160,8 @@ function PrioritisedContentFilter(rootEl, opts) {
 
     init();
 
+    this.getHiddenItems = getHiddenItems;
+    this.getRemainingItems = getRemainingItems;
     this.filter = filter;
     this.destroy = destroy;
 
