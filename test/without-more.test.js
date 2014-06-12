@@ -1,7 +1,7 @@
 /*global require,describe,beforeEach,afterEach,it,expect*/
 
 var fixtures = require('./helpers/fixtures'),
-    PrioritisedContentFilter = require('./../main'),
+    SquishyList = require('./../main'),
     testPCF,
     pcfEl;
 
@@ -12,13 +12,13 @@ function nodeListToArray(nl) {
     });
 }
 
-describe("oPrioritisedContentFilter behaviour without More", function() {
+describe("o-squishy-list behaviour without More", function() {
     "use strict";
 
     beforeEach(function(){
         fixtures.insertWithoutMore();
         pcfEl = document.querySelector('ul');
-        testPCF = new PrioritisedContentFilter(pcfEl);
+        testPCF = new SquishyList(pcfEl);
     });
 
     afterEach(function() {
@@ -30,7 +30,7 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
     describe("Initialisation", function() {
         it("is defined", function() {
-            expect(PrioritisedContentFilter).toBeDefined();
+            expect(SquishyList).toBeDefined();
         });
 
         it("initial dom changes", function() {
@@ -42,13 +42,13 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("Items without priority are hidden first", function() {
             pcfEl.style.width = "850px";
-            testPCF.filter();
+            testPCF.squish();
             expect(pcfEl.querySelectorAll(':not([data-priority]):not([data-more])[aria-hidden="true"]').length).toEqual(2);
         });
 
         it("Priority 3 and lower items are hidden next", function() {
             pcfEl.style.width = "650px";
-            testPCF.filter();
+            testPCF.squish();
             expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(4);
             expect(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]').length).toEqual(2);
             expect(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]').length).toEqual(2);
@@ -56,7 +56,7 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("Priority 2 and lower items are hidden next", function() {
             pcfEl.style.width = "350px";
-            testPCF.filter();
+            testPCF.squish();
             expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(7);
             expect(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]').length).toEqual(2);
             expect(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]').length).toEqual(2);
@@ -69,10 +69,10 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         beforeEach(function() {
             pcfEl.style.width = "650px";
-            testPCF.filter();
+            testPCF.squish();
             expect(pcfEl.querySelectorAll(':not([data-more])[aria-hidden="true"]').length).toEqual(4);
             pcfEl.style.width = "1000px";
-            testPCF.filter();
+            testPCF.squish();
         });
 
         it("Items are shown", function() {
@@ -85,7 +85,7 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("When items without priority are hidden", function() {
             pcfEl.style.width = "850px";
-            testPCF.filter();
+            testPCF.squish();
             expect(testPCF.getHiddenItems().length).toEqual(2);
             expect(testPCF.getHiddenItems()[0]).toEqual(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]')[0]);
             expect(testPCF.getHiddenItems()[1]).toEqual(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]')[1]);
@@ -95,7 +95,7 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("When priority 3 and lower items are hidden", function() {
             pcfEl.style.width = "650px";
-            testPCF.filter();
+            testPCF.squish();
             expect(testPCF.getHiddenItems().length).toEqual(4);
             expect(testPCF.getHiddenItems()[2]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[0]);
             expect(testPCF.getHiddenItems()[3]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[1]);
@@ -105,7 +105,7 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("When priority 2 and lower items are hidden", function() {
             pcfEl.style.width = "350px";
-            testPCF.filter();
+            testPCF.squish();
             expect(testPCF.getHiddenItems().length).toEqual(7);
             expect(testPCF.getHiddenItems()[4]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
             expect(testPCF.getHiddenItems()[5]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[1]);
@@ -116,9 +116,9 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("When all items are re-shown", function() {
             pcfEl.style.width = "350px";
-            testPCF.filter();
+            testPCF.squish();
             pcfEl.style.width = "1000px";
-            testPCF.filter();
+            testPCF.squish();
             expect(testPCF.getHiddenItems().length).toEqual(0);
             expect(testPCF.getRemainingItems().length).toEqual(9);
             expect(testPCF.getRemainingItems()).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"])')));
@@ -136,16 +136,16 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         beforeEach(function() {
             pcfLastEvent = null;
-            document.body.addEventListener('oPrioritisedContentFilter.change', pcfEventHandler, false);
+            document.body.addEventListener('oSquishyList.change', pcfEventHandler, false);
         });
 
         afterEach(function() {
-            document.body.removeEventListener('oPrioritisedContentFilter.change', pcfEventHandler, false);
+            document.body.removeEventListener('oSquishyList.change', pcfEventHandler, false);
         });
 
         it("When items without priority are hidden", function() {
             pcfEl.style.width = "850px";
-            testPCF.filter();
+            testPCF.squish();
             expect(pcfLastEvent.hiddenItems.length).toEqual(2);
             expect(pcfLastEvent.hiddenItems[0]).toEqual(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]')[0]);
             expect(pcfLastEvent.hiddenItems[1]).toEqual(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]')[1]);
@@ -155,7 +155,7 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("When priority 3 and lower items are hidden", function() {
             pcfEl.style.width = "650px";
-            testPCF.filter();
+            testPCF.squish();
             expect(pcfLastEvent).toBeTruthy();
             expect(pcfLastEvent.hiddenItems.length).toEqual(4);
             expect(pcfLastEvent.hiddenItems[2]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[0]);
@@ -166,7 +166,7 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("When priority 2 and lower items are hidden", function() {
             pcfEl.style.width = "350px";
-            testPCF.filter();
+            testPCF.squish();
             expect(pcfLastEvent).toBeTruthy();
             expect(pcfLastEvent.hiddenItems.length).toEqual(7);
             expect(pcfLastEvent.hiddenItems[4]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
@@ -178,9 +178,9 @@ describe("oPrioritisedContentFilter behaviour without More", function() {
 
         it("When all items are re-shown", function() {
             pcfEl.style.width = "350px";
-            testPCF.filter();
+            testPCF.squish();
             pcfEl.style.width = "1000px";
-            testPCF.filter();
+            testPCF.squish();
             expect(pcfLastEvent).toBeTruthy();
             expect(pcfLastEvent.hiddenItems.length).toEqual(0);
             expect(pcfLastEvent.remainingItems.length).toEqual(9);

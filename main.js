@@ -1,6 +1,6 @@
 /*global module*/
 
-function PrioritisedContentFilter(rootEl, opts) {
+function SquishyList(rootEl, opts) {
     "use strict";
 
     var allItemEls,
@@ -112,7 +112,7 @@ function PrioritisedContentFilter(rootEl, opts) {
         });
     }
 
-    function filter() {
+    function squish() {
         showAllItems();
         hideEl(moreEl);
         if (!doesContentFit()) {
@@ -124,7 +124,7 @@ function PrioritisedContentFilter(rootEl, opts) {
                 }
             }
         }
-        dispatchCustomEvent('oPrioritisedContentFilter.change', {
+        dispatchCustomEvent('oSquishyList.change', {
             hiddenItems: getHiddenItems(),
             remainingItems: getRemainingItems()
         });
@@ -132,7 +132,7 @@ function PrioritisedContentFilter(rootEl, opts) {
 
     function resizeHandler() {
         clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(filter, 50);
+        debounceTimeout = setTimeout(squish, 50);
     }
 
     function destroy() {
@@ -140,11 +140,11 @@ function PrioritisedContentFilter(rootEl, opts) {
             allItemEls[c].removeAttribute('aria-hidden');
         }
         window.removeEventListener('resize', resizeHandler, false);
-        rootEl.removeAttribute('data-o-prioritised-content-filter-js');
+        rootEl.removeAttribute('data-o-squishy-list-js');
     }
 
     function init() {
-        rootEl.setAttribute('data-o-prioritised-content-filter-js', '');
+        rootEl.setAttribute('data-o-squishy-list-js', '');
         getPrioritySortedChildNodeEls();
         moreEl = rootEl.querySelector('[data-more]');
         if (moreEl) {
@@ -152,7 +152,7 @@ function PrioritisedContentFilter(rootEl, opts) {
             moreWidth = moreEl.offsetWidth;
             hideEl(moreEl);
         }
-        filter();
+        squish();
         if (options.filterOnResize) {
             window.addEventListener('resize', resizeHandler, false);
         }
@@ -162,11 +162,11 @@ function PrioritisedContentFilter(rootEl, opts) {
 
     this.getHiddenItems = getHiddenItems;
     this.getRemainingItems = getRemainingItems;
-    this.filter = filter;
+    this.squish = squish;
     this.destroy = destroy;
 
-    dispatchCustomEvent('oPrioritisedContentFilter.ready');
+    dispatchCustomEvent('oSquishyList.ready');
 
 }
 
-module.exports = PrioritisedContentFilter;
+module.exports = SquishyList;

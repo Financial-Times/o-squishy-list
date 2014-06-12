@@ -1,5 +1,5 @@
 {
-    "description": "Prioritised content filter",
+    "description": "A horizontal list of elements that 'squishes' down, lowest priority first.",
     "origamiType": "module",
     "origamiVersion": 1,
     "support": "",
@@ -9,7 +9,7 @@
         "optional": []
     },
     "ci": {
-        "travis": "https://api.travis-ci.org/repos/Financial-Times/o-prioritised-content-filter/builds.json"
+        "travis": "https://api.travis-ci.org/repos/Financial-Times/o-squishy-list/builds.json"
     },
     "demos": [
         {

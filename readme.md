@@ -1,11 +1,11 @@
-o-prioritised-content-filter [![Build Status](https://travis-ci.org/Financial-Times/o-prioritised-content-filter.png?branch=master)](https://travis-ci.org/Financial-Times/o-prioritised-content-filter)
+o-squishy-list [![Build Status](https://travis-ci.org/Financial-Times/o-squishy-list.png?branch=master)](https://travis-ci.org/Financial-Times/o-squishy-list)
 =======
 
 Hides lowest priority items when space does not allow.
 
 ## Construction
 
-Given a root HTML element, __o-prioritised-content-filter__ will assume each immediate element child is a _content item_. 
+Given a root HTML element, __o-squishy-list__ will assume each immediate element child is a _content item_. 
 
 The _content items_ should be given a `data-priority` attribute containing a positive integer to indicate its priority with regard to display. The lower the number the higher the priority. Low-priority items will be hidden first, high-priority items will be hidden last.
 
@@ -52,7 +52,7 @@ In order to calculate the total width required, items must be set to `display: i
 
 ### Primary and core experience
 
-When the JS has run, a `data-o-prioritised-content-filter-js` attribute will be set on the root element. This can be used in CSS selectors to target primary or core.
+When the JS has run, a `data-o-squishy-list-js` attribute will be set on the root element. This can be used in CSS selectors to target primary or core.
 
 For core experience, it is recommended to style content items so that they can all be accessible when they are shown - e.g. via wrapping or scrolling.
 
@@ -70,22 +70,22 @@ nav li:not([data-priority='1']) {
 
 No code will run automatically.
 
-An __o-prioritised-content-filter__ object must be constructed for each container you want to filter.
+An __o-squishy-list__ object must be constructed for each container you want to filter.
 
 ```javascript
 
-var oPrioritisedContentFilter = require('o-prioritised-content-filter');
+var oPrioritisedContentFilter = require('o-squishy-list');
 
 var nav = new oPrioritisedContentFilter(document.getElementsByTagName('ul'));
 ```
 
 A optional second argument can be passed, containing a configuration object, with the following possible properties:
 
-* `filterOnResize` (boolean, default `true`) - if `true` will listen for the `window.resize` event and automatically call `.filter()`
+* `filterOnResize` (boolean, default `true`) - if `true` will listen for the `window.resize` event and automatically call `.squish()`
 
 ### Methods
 
-* `filter()` Hide items of lowest priority that don't currently fit into the available width.
+* `squish()` Hide items of lowest priority that don't currently fit into the available width.
 * `getHiddenItems()` Returns a list of the currently hidden item elements.
 * `getRemainingItems()` Returns a list of the currently remaining item elements.
 * `destroy()` Unbind events, un-hide items etc.
