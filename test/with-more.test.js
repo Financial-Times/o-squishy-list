@@ -55,12 +55,12 @@ describe("o-squishy-list behaviour with More", function() {
         });
 
         it("Priority 2 and lower items are hidden next", function() {
-            pcfEl.style.width = "350px";
+            pcfEl.style.width = "450px";
             testPCF.squish();
-            expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(7);
+            expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(6);
             expect(pcfEl.querySelectorAll(':not([data-priority])[aria-hidden="true"]').length).toEqual(2);
             expect(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]').length).toEqual(2);
-            expect(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]').length).toEqual(3);
+            expect(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]').length).toEqual(2);
         });
 
     });
@@ -108,13 +108,12 @@ describe("o-squishy-list behaviour with More", function() {
         });
 
         it("When priority 2 and lower items are hidden", function() {
-            pcfEl.style.width = "350px";
+            pcfEl.style.width = "450px";
             testPCF.squish();
-            expect(testPCF.getHiddenItems().length).toEqual(7);
+            expect(testPCF.getHiddenItems().length).toEqual(6);
             expect(testPCF.getHiddenItems()[4]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
             expect(testPCF.getHiddenItems()[5]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[1]);
-            expect(testPCF.getHiddenItems()[6]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[2]);
-            expect(testPCF.getRemainingItems().length).toEqual(2);
+            expect(testPCF.getRemainingItems().length).toEqual(3);
             expect(testPCF.getRemainingItems()).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
         });
 
@@ -169,14 +168,13 @@ describe("o-squishy-list behaviour with More", function() {
         });
 
         it("When priority 2 and lower items are hidden", function() {
-            pcfEl.style.width = "350px";
+            pcfEl.style.width = "450px";
             testPCF.squish();
             expect(pcfLastEvent).toBeTruthy();
-            expect(pcfLastEvent.hiddenItems.length).toEqual(7);
+            expect(pcfLastEvent.hiddenItems.length).toEqual(6);
             expect(pcfLastEvent.hiddenItems[4]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
             expect(pcfLastEvent.hiddenItems[5]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[1]);
-            expect(pcfLastEvent.hiddenItems[6]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[2]);
-            expect(pcfLastEvent.remainingItems.length).toEqual(2);
+            expect(pcfLastEvent.remainingItems.length).toEqual(3);
             expect(pcfLastEvent.remainingItems).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
         });
 
