@@ -5,7 +5,9 @@ Hides lowest priority items when space does not allow.
 
 ## Construction
 
-Given a root HTML element, __o-squishy-list__ will assume each immediate element child is a _content item_. 
+Given a root HTML element, __o-squishy-list__ will assume each immediate element child is a _content item_.
+
+## Declaring content item priorities
 
 The _content items_ should be given a `data-priority` attribute containing a positive integer to indicate its priority with regard to display. The lower the number the higher the priority. Low-priority items will be hidden first, high-priority items will be hidden last.
 
@@ -15,7 +17,7 @@ Where multiple items share the same priority number, they will be hidden or show
 
 If an item doesn't have a `data-priority` attribute, then it will be treated as lower priority than the lowest explicitly-set priority. Therefore if no items have the attribute, they will _all_ hide and show together.
 
-An example with four items using three levels of priority:
+An example with four items using three levels of priority (the last item will be assumed to be priority 3):
 
 ```html
 <ul>
@@ -26,7 +28,7 @@ An example with four items using three levels of priority:
 </ul>
 ```
 
-In this example, the last item is in effect treated as priority `3`.
+Sometimes you might want a particular content item to never be hidden. You can do this by setting its priority to `-1` to remove it from the priorities list.
 
 ### More
 
@@ -42,7 +44,9 @@ If some cases you might want a 'more' item which will only show when content has
 </ul>
 ```
 
-When a _More_ item is present, sufficient _content items_ will be hidden to make space for it to show. The width of the _More_ item should not be allowed to change, as only the initial width is used for the content filtering calculations.
+When a _More_ item element is present, sufficient _content items_ will be hidden to make space for it to show. The width of the _More_ item should not be allowed to change, as only the initial width is used for the content filtering calculations.
+
+The __More__ item will not be hidden, even if there is not sufficient space for it to show.
 
 ## Styling
 

@@ -59,7 +59,7 @@ function SquishyList(rootEl, opts) {
                 thisItemPriority = getElPriority(thisItemEl);
             if (isNaN(thisItemPriority)) {
                 unprioritisedItemEls.push(thisItemEl);
-            } else {
+            } else if (thisItemPriority >= 0) {
                 if (!Array.isArray(prioritySortedItemEls[thisItemPriority])) {
                     prioritySortedItemEls[thisItemPriority] = [];
                 }
@@ -114,8 +114,9 @@ function SquishyList(rootEl, opts) {
 
     function squish() {
         showAllItems();
-        hideEl(moreEl);
-        if (!doesContentFit()) {
+        if (doesContentFit()) {
+            hideEl(moreEl);
+        } else {
             for (var p = prioritySortedItemEls.length - 1; p >= 0; p--) {
                 hideItems(prioritySortedItemEls[p]);
                 if ((getVisibleContentWidth() + moreWidth) <= rootEl.clientWidth) {
