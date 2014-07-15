@@ -5,7 +5,9 @@
     "support": "",
     "supportStatus": "active",
     "browserFeatures": {
-        "required": [],
+        "required": [
+            "createevent"
+        ],
         "optional": []
     },
     "ci": {
