@@ -27,7 +27,8 @@ function SquishyList(rootEl, opts) {
             childNodeEl;
         for (var c = 0, l = rootEl.childNodes.length; c < l; c++) {
             childNodeEl = rootEl.childNodes[c];
-            if (childNodeEl.nodeType === 1 && !childNodeEl.hasAttribute('data-more')) {
+            // Make it flexible so that other product and modules can manually hide elements and o-squishy-list won't add it to it's list
+            if (childNodeEl.nodeType === 1 && !childNodeEl.hasAttribute('data-more') && !childNodeEl.hasAttribute('data-o-squishy-list--ignore')) {
                 itemEls.push(childNodeEl);
             }
         }

@@ -48,6 +48,10 @@ When a _More_ item element is present, sufficient _content items_ will be hidden
 
 The __More__ item will not be hidden, even if there is not sufficient space for it to show.
 
+### Hiding items manually
+
+If you need to hide a list item manually via CSS or JS, you need to add the data-attribute `data-o-squishy-list--ignore` to that item. This way, `o-squishy-list` will stop adding that item to it's item list.
+
 ## Styling
 
 The root element should have minimum and maximum widths set.
