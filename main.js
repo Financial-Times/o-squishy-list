@@ -146,6 +146,11 @@ function SquishyList(rootEl, opts) {
     }
 
     function init() {
+        if (!rootEl) {
+            rootEl = document.body;
+        } else if (!(rootEl instanceof HTMLElement)) {
+            rootEl = document.querySelector(rootEl);
+        }
         rootEl.setAttribute('data-o-squishy-list-js', '');
         getPrioritySortedChildNodeEls();
         moreEl = rootEl.querySelector('[data-more]');
