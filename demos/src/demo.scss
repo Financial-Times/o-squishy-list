@@ -1,53 +1,52 @@
 
 .drop-off {
-  margin: 0 20px;
-  padding: 0;
-  max-width: 950px;
-  max-height: 100px;
-  font-family: sans-serif;
-  font-size: 14px;
-  background-color: #fdd;
-  white-space: nowrap;
-  overflow: hidden;
+	margin: 0 20px;
+	padding: 0;
+	max-width: 950px;
+	max-height: 100px;
+	font-family: sans-serif;
+	font-size: 14px;
+	background-color: #ffdddd;
+	white-space: nowrap;
+	overflow: hidden;
 
-  li {
-    display: inline-block;
-    margin: 0;
-    padding: 0 20px;
-    list-style-type: none;
-    line-height: 100px;
-    color: #fff;
-    text-align: center;
-  }
+	li {
+		display: inline-block;
+		margin: 0;
+		padding: 0 20px;
+		list-style-type: none;
+		line-height: 100px;
+		color: #ffffff;
+		text-align: center;
+	}
 
-  li[aria-hidden=true] {
-    display: none;
-  }
+	[aria-hidden=true] {
+		display: none;
+	}
 
-  li:not([data-priority]) {
-    background-color: #333;
-  }
+	:not([data-priority]) {
+		background-color: #333333;
+	}
 
-  li[data-priority='3'] {
-    background-color: #666;
-  }
+	[data-priority='3'] {
+		background-color: #666666;
+	}
 
-  li[data-priority='2'] {
-    background-color: #999;
-  }
+	[data-priority='2'] {
+		background-color: #999999;
+	}
 
-  li[data-priority='1'] {
-    background-color: #bbb;
-  }
+	[data-priority='1'] {
+		background-color: #bbbbbb;
+	}
 
-  li[data-priority='-1'] {
-    background-color: #ddd;
-    color: #888;
-  }
+	[data-priority='-1'] {
+		background-color: #dddddd;
+		color: #888888;
+	}
 
-  li[data-more] {
-    font-weight: bold;
-    background-color: #833;
-  }
-
+	[data-more] {
+		font-weight: bold;
+		background-color: #883333;
+	}
 }
