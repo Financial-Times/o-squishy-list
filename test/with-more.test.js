@@ -12,39 +12,39 @@ function nodeListToArray(nl) {
 	});
 }
 
-describe("o-squishy-list behaviour with More", function() {
+describe("o-squishy-list behaviour with More", () => {
 	beforeEach(function(){
 		fixtures.insertWithMore();
 		pcfEl = document.querySelector('ul');
 		testPCF = new SquishyList(pcfEl);
 	});
 
-	afterEach(function() {
+	afterEach(() => {
 		testPCF.destroy();
 		testPCF = null;
 		pcfEl = null;
 		fixtures.reset();
 	});
 
-	describe("Initialisation", function() {
-		it("is defined", function() {
+	describe("Initialisation", () => {
+		it("is defined", () => {
 			expect(SquishyList).toBeDefined();
 		});
 
-		it("initial dom changes", function() {
+		it("initial dom changes", () => {
 			expect(pcfEl.querySelectorAll('[data-priority][aria-hidden="true"]').length).toEqual(0);
 		});
 	});
 
-	describe("Hiding item elements", function() {
+	describe("Hiding item elements", () => {
 
-		it("Items without priority are hidden first", function() {
+		it("Items without priority are hidden first", () => {
 			pcfEl.style.width = "850px";
 			testPCF.squish();
 			expect(pcfEl.querySelectorAll(':not([data-priority]):not([data-more])[aria-hidden="true"]').length).toEqual(2);
 		});
 
-		it("Priority 3 and lower items are hidden next", function() {
+		it("Priority 3 and lower items are hidden next", () => {
 			pcfEl.style.width = "650px";
 			testPCF.squish();
 			expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(4);
@@ -52,7 +52,7 @@ describe("o-squishy-list behaviour with More", function() {
 			expect(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]').length).toEqual(2);
 		});
 
-		it("Priority 2 and lower items are hidden next", function() {
+		it("Priority 2 and lower items are hidden next", () => {
 			pcfEl.style.width = "450px";
 			testPCF.squish();
 			expect(pcfEl.querySelectorAll('[aria-hidden="true"]').length).toEqual(6);
@@ -63,9 +63,9 @@ describe("o-squishy-list behaviour with More", function() {
 
 	});
 
-	describe("Items are re-shown when size allows", function() {
+	describe("Items are re-shown when size allows", () => {
 
-		beforeEach(function() {
+		beforeEach(() => {
 			pcfEl.style.width = "650px";
 			testPCF.squish();
 			expect(pcfEl.querySelectorAll(':not([data-more])[aria-hidden="true"]').length).toEqual(4);
@@ -73,19 +73,19 @@ describe("o-squishy-list behaviour with More", function() {
 			testPCF.squish();
 		});
 
-		it("Items are shown", function() {
+		it("Items are shown", () => {
 			expect(pcfEl.querySelectorAll(':not([data-more])[aria-hidden="true"]').length).toEqual(0);
 		});
 
-		it("More element is hidden", function() {
+		it("More element is hidden", () => {
 			expect(pcfEl.querySelectorAll('[data-more][aria-hidden="true"]').length).toEqual(1);
 		});
 
 	});
 
-	describe("getHiddenItems(), getRemainingItems()", function() {
+	describe("getHiddenItems(), getRemainingItems()", () => {
 
-		it("When items without priority are hidden", function() {
+		it("When items without priority are hidden", () => {
 			pcfEl.style.width = "850px";
 			testPCF.squish();
 			expect(testPCF.getHiddenItems().length).toEqual(2);
@@ -95,7 +95,7 @@ describe("o-squishy-list behaviour with More", function() {
 			expect(testPCF.getRemainingItems()).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
 
-		it("When priority 3 and lower items are hidden", function() {
+		it("When priority 3 and lower items are hidden", () => {
 			pcfEl.style.width = "650px";
 			testPCF.squish();
 			expect(testPCF.getHiddenItems().length).toEqual(4);
@@ -105,7 +105,7 @@ describe("o-squishy-list behaviour with More", function() {
 			expect(testPCF.getRemainingItems()).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
 
-		it("When priority 2 and lower items are hidden", function() {
+		it("When priority 2 and lower items are hidden", () => {
 			pcfEl.style.width = "450px";
 			testPCF.squish();
 			expect(testPCF.getHiddenItems().length).toEqual(6);
@@ -115,7 +115,7 @@ describe("o-squishy-list behaviour with More", function() {
 			expect(testPCF.getRemainingItems()).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
 
-		it("When all items are re-shown", function() {
+		it("When all items are re-shown", () => {
 			pcfEl.style.width = "350px";
 			testPCF.squish();
 			pcfEl.style.width = "1000px";
@@ -127,7 +127,7 @@ describe("o-squishy-list behaviour with More", function() {
 
 	});
 
-	describe("Events fired when items are hidden or shown", function() {
+	describe("Events fired when items are hidden or shown", () => {
 
 		var pcfLastEvent;
 
@@ -135,16 +135,16 @@ describe("o-squishy-list behaviour with More", function() {
 			pcfLastEvent = ev.detail;
 		}
 
-		beforeEach(function() {
+		beforeEach(() => {
 			pcfLastEvent = null;
 			document.body.addEventListener('oSquishyList.change', pcfEventHandler, false);
 		});
 
-		afterEach(function() {
+		afterEach(() => {
 			document.body.removeEventListener('oSquishyList.change', pcfEventHandler, false);
 		});
 
-		it("When items without priority are hidden", function() {
+		it("When items without priority are hidden", () => {
 			pcfEl.style.width = "850px";
 			testPCF.squish();
 			expect(pcfLastEvent.hiddenItems.length).toEqual(2);
@@ -154,7 +154,7 @@ describe("o-squishy-list behaviour with More", function() {
 			expect(pcfLastEvent.remainingItems).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
 
-		it("When priority 3 and lower items are hidden", function() {
+		it("When priority 3 and lower items are hidden", () => {
 			pcfEl.style.width = "650px";
 			testPCF.squish();
 			expect(pcfLastEvent).toBeTruthy();
@@ -165,7 +165,7 @@ describe("o-squishy-list behaviour with More", function() {
 			expect(pcfLastEvent.remainingItems).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
 
-		it("When priority 2 and lower items are hidden", function() {
+		it("When priority 2 and lower items are hidden", () => {
 			pcfEl.style.width = "450px";
 			testPCF.squish();
 			expect(pcfLastEvent).toBeTruthy();
@@ -176,7 +176,7 @@ describe("o-squishy-list behaviour with More", function() {
 			expect(pcfLastEvent.remainingItems).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
 
-		it("When all items are re-shown", function() {
+		it("When all items are re-shown", () => {
 			pcfEl.style.width = "350px";
 			testPCF.squish();
 			pcfEl.style.width = "1000px";
@@ -189,23 +189,23 @@ describe("o-squishy-list behaviour with More", function() {
 
 	});
 
-	describe("More item is shown when items are hidden", function() {
+	describe("More item is shown when items are hidden", () => {
 
-		afterEach(function() {
+		afterEach(() => {
 			expect(pcfEl.querySelectorAll('[data-more]:not([aria-hidden="true"])').length).toEqual(1);
 		});
 
-		it("When items without priority are hidden", function() {
+		it("When items without priority are hidden", () => {
 			pcfEl.style.width = "850px";
 			testPCF.squish();
 		});
 
-		it("When priority 3 and lower items are hidden", function() {
+		it("When priority 3 and lower items are hidden", () => {
 			pcfEl.style.width = "650px";
 			testPCF.squish();
 		});
 
-		it("When priority 2 and lower items are hidden", function() {
+		it("When priority 2 and lower items are hidden", () => {
 			pcfEl.style.width = "350px";
 			testPCF.squish();
 		});
