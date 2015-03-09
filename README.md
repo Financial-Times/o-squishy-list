@@ -52,6 +52,15 @@ The __More__ item will not be hidden, even if there is not sufficient space for 
 
 If you need to hide a list item manually via CSS or JS, you need to add the data-attribute `data-o-squishy-list--ignore` to that item. This way, `o-squishy-list` will stop adding that item to its item list.
 
+```html
+<ul class="drop-off">
+    <li data-priority="2" data-o-squishy-list--ignore="true">Ignore me</li>
+    <li data-priority="1">Priority 1</li>
+    <li data-priority="3">Priority 3</li>
+    <li>No priority</li>
+</ul>
+```
+
 ## Styling
 
 The root element should have minimum and maximum widths set.
