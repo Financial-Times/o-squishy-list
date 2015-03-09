@@ -3,13 +3,13 @@
 function SquishyList(rootEl, opts) {
 	"use strict";
 
-	var allItemEls,
-		prioritySortedItemEls,
-		hiddenItemEls,
-		moreEl,
-		moreWidth = 0,
-		debounceTimeout,
-		options = opts || { filterOnResize: true };
+	var allItemEls;
+	var prioritySortedItemEls;
+	var hiddenItemEls;
+	var moreEl;
+	var moreWidth = 0;
+	var debounceTimeout;
+	var options = opts || { filterOnResize: true };
 
 	function dispatchCustomEvent(name, data) {
 		if (document.createEvent && rootEl.dispatchEvent) {
@@ -23,8 +23,9 @@ function SquishyList(rootEl, opts) {
 	}
 
 	function getItemEls() {
-		var itemEls = [],
-			childNodeEl;
+		var itemEls = [];
+		var childNodeEl;
+
 		for (var c = 0, l = rootEl.childNodes.length; c < l; c++) {
 			childNodeEl = rootEl.childNodes[c];
 			// Make it flexible so that other product and modules can manually hide elements and o-squishy-list won't add it to it's list

@@ -1,19 +1,19 @@
 /*global require,describe,beforeEach,afterEach,it,expect*/
 "use strict";
 
-var fixtures = require('./helpers/fixtures');
-var SquishyList = require('./../main');
-var testPCF;
-var pcfEl;
+import fixtures from './helpers/fixtures.js';
+import SquishyList from './../main.js';
+let testPCF;
+let pcfEl;
 
 function nodeListToArray(nl) {
-	return [].map.call(nl, function(element) {
+	return [].map.call(nl, (element) => {
 		return element;
 	});
 }
 
 describe("o-squishy-list behaviour with More", () => {
-	beforeEach(function(){
+	beforeEach(() => {
 		fixtures.insertWithMore();
 		pcfEl = document.querySelector('ul');
 		testPCF = new SquishyList(pcfEl);
@@ -129,7 +129,7 @@ describe("o-squishy-list behaviour with More", () => {
 
 	describe("Events fired when items are hidden or shown", () => {
 
-		var pcfLastEvent;
+		let pcfLastEvent;
 
 		function pcfEventHandler(ev) {
 			pcfLastEvent = ev.detail;
