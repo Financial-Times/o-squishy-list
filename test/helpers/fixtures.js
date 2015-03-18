@@ -77,6 +77,8 @@ function insertWithMore() {
 	insert(getStyles() + html);
 }
 
-exports.insertWithoutMore = insertWithoutMore;
-exports.insertWithMore = insertWithMore;
-exports.reset = reset;
+export {
+	insertWithoutMore,
+	insertWithMore,
+	reset
+};
