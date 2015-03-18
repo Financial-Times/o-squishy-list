@@ -1,7 +1,7 @@
 {
   "name": "o-squishy-list",
-  "version": "0.0.0",
-  "description": "UI tabs",
+  "private": true,
+  "description": "A horizontal list of elements that 'squishes' down, lowest priority first.",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
