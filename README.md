@@ -1,5 +1,4 @@
-o-squishy-list [![Build Status](https://travis-ci.org/Financial-Times/o-squishy-list.png?branch=master)](https://travis-ci.org/Financial-Times/o-squishy-list)
-=======
+# o-squishy-list [![Build Status](https://travis-ci.org/Financial-Times/o-squishy-list.png?branch=master)](https://travis-ci.org/Financial-Times/o-squishy-list)
 
 Hides lowest priority items when space does not allow.
 
@@ -90,7 +89,6 @@ No code will run automatically.
 An __o-squishy-list__ object must be constructed for each container you want to filter.
 
 ```javascript
-
 var oPrioritisedContentFilter = require('o-squishy-list');
 
 var nav = new oPrioritisedContentFilter(document.getElementsByTagName('ul'));
@@ -130,3 +128,11 @@ document.getElementsByTagName('ul')[0].addEventListener('oPrioritisedContentFilt
     }
 }, false);
 ```
+
+----
+
+## License
+
+Copyright (c) 2015 Financial Times Ltd. All rights reserved.
+
+This software is published under the [MIT licence](http://opensource.org/licenses/MIT).
