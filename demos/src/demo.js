@@ -1,7 +1,7 @@
 /*global require*/
 "use strict";
 
-import {SquishyList} from './../../main';
+import SquishyList from './../../main';
 
 const els = document.querySelectorAll('.drop-off');
 
