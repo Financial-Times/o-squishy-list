@@ -2,7 +2,7 @@
 "use strict";
 
 import * as fixtures from './helpers/fixtures';
-import SquishyList from './../main';
+import {SquishyList} from './../main';
 
 let testPCF;
 let pcfEl;
