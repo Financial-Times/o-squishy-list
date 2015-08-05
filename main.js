@@ -1,4 +1,4 @@
-function SquishyList(rootEl, opts) {
+export default function SquishyList(rootEl, opts) {
 	"use strict";
 
 	let allItemEls;
@@ -175,7 +175,3 @@ function SquishyList(rootEl, opts) {
 	dispatchCustomEvent('oSquishyList.ready');
 
 }
-
-export {
-	SquishyList
-};
