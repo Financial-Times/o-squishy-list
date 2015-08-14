@@ -84,9 +84,10 @@ function SquishyList(rootEl, opts) {
 	}
 
 	function hideItems(els) {
-		hiddenItemEls = hiddenItemEls.concat(els);
-		for (var c = 0, l = els.length; c < l; c++) {
-			hideEl(els[c]);
+		// We want highest priority items to be at the beginning of the array
+		for (var i = els.length - 1; i > -1; i--) {
+			hiddenItemEls.unshift(els[i]);
+			hideEl(els[i]);
 		}
 	}
 
