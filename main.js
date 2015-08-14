@@ -1,5 +1,4 @@
 export default function SquishyList(rootEl, opts) {
-	"use strict";
 
 	let allItemEls;
 	let prioritySortedItemEls;

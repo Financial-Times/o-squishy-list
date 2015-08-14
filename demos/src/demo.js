@@ -1,5 +1,4 @@
 /*global require*/
-"use strict";
 
 import SquishyList from './../../main';
 

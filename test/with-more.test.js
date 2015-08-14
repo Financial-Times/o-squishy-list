@@ -1,5 +1,4 @@
 /*global require,describe,beforeEach,afterEach,it,expect*/
-"use strict";
 
 import * as fixtures from './helpers/fixtures';
 import SquishyList from './../main';
