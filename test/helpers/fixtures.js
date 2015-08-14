@@ -1,4 +1,3 @@
-/*global exports*/
 let sandboxEl;
 
 function createSandbox() {

@@ -1,4 +1,4 @@
-/*global require,describe,beforeEach,afterEach,it,expect*/
+/*global describe,beforeEach,afterEach,it,expect*/
 
 import * as fixtures from './helpers/fixtures';
 import SquishyList from './../main';
@@ -99,8 +99,8 @@ describe("o-squishy-list behaviour with More", () => {
 			pcfEl.style.width = "650px";
 			testPCF.squish();
 			expect(testPCF.getHiddenItems().length).toEqual(4);
-			expect(testPCF.getHiddenItems()[2]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[0]);
-			expect(testPCF.getHiddenItems()[3]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[1]);
+			expect(testPCF.getHiddenItems()[0]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[0]);
+			expect(testPCF.getHiddenItems()[1]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[1]);
 			expect(testPCF.getRemainingItems().length).toEqual(5);
 			expect(testPCF.getRemainingItems()).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
@@ -109,8 +109,8 @@ describe("o-squishy-list behaviour with More", () => {
 			pcfEl.style.width = "450px";
 			testPCF.squish();
 			expect(testPCF.getHiddenItems().length).toEqual(6);
-			expect(testPCF.getHiddenItems()[4]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
-			expect(testPCF.getHiddenItems()[5]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[1]);
+			expect(testPCF.getHiddenItems()[0]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
+			expect(testPCF.getHiddenItems()[1]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[1]);
 			expect(testPCF.getRemainingItems().length).toEqual(3);
 			expect(testPCF.getRemainingItems()).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
@@ -159,8 +159,8 @@ describe("o-squishy-list behaviour with More", () => {
 			testPCF.squish();
 			expect(pcfLastEvent).toBeTruthy();
 			expect(pcfLastEvent.hiddenItems.length).toEqual(4);
-			expect(pcfLastEvent.hiddenItems[2]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[0]);
-			expect(pcfLastEvent.hiddenItems[3]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[1]);
+			expect(pcfLastEvent.hiddenItems[0]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[0]);
+			expect(pcfLastEvent.hiddenItems[1]).toEqual(pcfEl.querySelectorAll('[data-priority="3"][aria-hidden="true"]')[1]);
 			expect(pcfLastEvent.remainingItems.length).toEqual(5);
 			expect(pcfLastEvent.remainingItems).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
@@ -170,8 +170,8 @@ describe("o-squishy-list behaviour with More", () => {
 			testPCF.squish();
 			expect(pcfLastEvent).toBeTruthy();
 			expect(pcfLastEvent.hiddenItems.length).toEqual(6);
-			expect(pcfLastEvent.hiddenItems[4]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
-			expect(pcfLastEvent.hiddenItems[5]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[1]);
+			expect(pcfLastEvent.hiddenItems[0]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[0]);
+			expect(pcfLastEvent.hiddenItems[1]).toEqual(pcfEl.querySelectorAll('[data-priority="2"][aria-hidden="true"]')[1]);
 			expect(pcfLastEvent.remainingItems.length).toEqual(3);
 			expect(pcfLastEvent.remainingItems).toEqual(nodeListToArray(pcfEl.querySelectorAll(':not([aria-hidden="true"]):not([data-more])')));
 		});
