@@ -89,9 +89,9 @@ No code will run automatically.
 An __o-squishy-list__ object must be constructed for each container you want to filter.
 
 ```javascript
-var oPrioritisedContentFilter = require('o-squishy-list');
+var oSquishyList = require('o-squishy-list');
 
-var nav = new oPrioritisedContentFilter(document.getElementsByTagName('ul'));
+var nav = new oSquishyList(document.getElementsByTagName('ul'));
 ```
 
 A optional second argument can be passed, containing a configuration object, with the following possible properties:
@@ -109,19 +109,19 @@ A optional second argument can be passed, containing a configuration object, wit
 
 This module will dispatch the following events on its root element:
 
-* `oPrioritisedContentFilter.ready` - when the object has constructed.
-* `oPrioritisedContentFilter.change` - when the item(s) in view change - e.g. items have been hidden or shown. The event object will contain the following properties:
+* `oSquishyList.ready` - when the object has constructed.
+* `oSquishyList.change` - when the item(s) in view change - e.g. items have been hidden or shown. The event object will contain the following properties:
     * `detail.hiddenItems` - array of the hidden item elements. This will be an empty array when all items are shown. The _more_ item will not be included in this array.
     * `detail.remainingItems` - array of the remaining item elements. This will be an empty array when all items are hidden. The _more_ item will not be included in this array.
 
 A common use-case for this module is a variable-width navigation, where as the available space narrows, navigation items 'drop off' and are added to an expanded 'drop-down' menu.
 
-To achieve this, products should listen to the `oPrioritisedContentFilter.change` event, and use the included list of hidden items to determine what to add to the expandable drop-down menu.
+To achieve this, products should listen to the `oSquishyList.change` event, and use the included list of hidden items to determine what to add to the expandable drop-down menu.
 
 For example:
 
 ```javascript
-document.getElementsByTagName('ul')[0].addEventListener('oPrioritisedContentFilter.change', function(ev) {
+document.getElementsByTagName('ul')[0].addEventListener('oSquishyList.change', function(ev) {
     if (ev.detail.hiddenItems.length > 0) {
         // Loop through ev.detail.hiddenItems array
         // Extract the useful data from each element & add it to the More Menu
