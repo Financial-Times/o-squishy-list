@@ -1,19 +1,16 @@
-/*global module*/
+export default function SquishyList(rootEl, opts) {
 
-function SquishyList(rootEl, opts) {
-	"use strict";
-
-	var allItemEls;
-	var prioritySortedItemEls;
-	var hiddenItemEls;
-	var moreEl;
-	var moreWidth = 0;
-	var debounceTimeout;
-	var options = opts || { filterOnResize: true };
+	let allItemEls;
+	let prioritySortedItemEls;
+	let hiddenItemEls;
+	let moreEl;
+	let moreWidth = 0;
+	let debounceTimeout;
+	const options = opts || { filterOnResize: true };
 
 	function dispatchCustomEvent(name, data) {
 		if (document.createEvent && rootEl.dispatchEvent) {
-			var event = document.createEvent('Event');
+			const event = document.createEvent('Event');
 			event.initEvent(name, true, true);
 			if (data) {
 				event.detail = data;
@@ -23,11 +20,12 @@ function SquishyList(rootEl, opts) {
 	}
 
 	function getItemEls() {
-		var itemEls = [];
-		var childNodeEl;
+		const itemEls = [];
+		let childNodeEl;
 
-		for (var c = 0, l = rootEl.childNodes.length; c < l; c++) {
+		for (let c = 0, l = rootEl.childNodes.length; c < l; c++) {
 			childNodeEl = rootEl.childNodes[c];
+
 			// Make it flexible so that other product and modules can manually hide elements and o-squishy-list won't add it to it's list
 			if (childNodeEl.nodeType === 1 && !childNodeEl.hasAttribute('data-more') && !childNodeEl.hasAttribute('data-o-squishy-list--ignore')) {
 				itemEls.push(childNodeEl);
@@ -55,10 +53,10 @@ function SquishyList(rootEl, opts) {
 	function getPrioritySortedChildNodeEls() {
 		allItemEls = getItemEls();
 		prioritySortedItemEls = [];
-		var unprioritisedItemEls = [];
-		for (var c = 0, l = allItemEls.length; c < l; c++) {
-			var thisItemEl = allItemEls[c],
-				thisItemPriority = getElPriority(thisItemEl);
+		const unprioritisedItemEls = [];
+		for (let c = 0, l = allItemEls.length; c < l; c++) {
+			const thisItemEl = allItemEls[c];
+			const thisItemPriority = getElPriority(thisItemEl);
 			if (isNaN(thisItemPriority)) {
 				unprioritisedItemEls.push(thisItemEl);
 			} else if (thisItemPriority >= 0) {
@@ -78,22 +76,22 @@ function SquishyList(rootEl, opts) {
 
 	function showAllItems() {
 		hiddenItemEls = [];
-		for (var c = 0, l = allItemEls.length; c < l; c++) {
+		for (let c = 0, l = allItemEls.length; c < l; c++) {
 			showEl(allItemEls[c]);
 		}
 	}
 
 	function hideItems(els) {
 		// We want highest priority items to be at the beginning of the array
-		for (var i = els.length - 1; i > -1; i--) {
+		for (let i = els.length - 1; i > -1; i--) {
 			hiddenItemEls.unshift(els[i]);
 			hideEl(els[i]);
 		}
 	}
 
 	function getVisibleContentWidth() {
-		var visibleItemsWidth = 0;
-		for (var c = 0, l = allItemEls.length; c < l; c++) {
+		let visibleItemsWidth = 0;
+		for (let c = 0, l = allItemEls.length; c < l; c++) {
 			if (!allItemEls[c].hasAttribute('aria-hidden')) {
 				visibleItemsWidth += allItemEls[c].offsetWidth; // Needs to take into account margins too
 			}
@@ -120,7 +118,7 @@ function SquishyList(rootEl, opts) {
 		if (doesContentFit()) {
 			hideEl(moreEl);
 		} else {
-			for (var p = prioritySortedItemEls.length - 1; p >= 0; p--) {
+			for (let p = prioritySortedItemEls.length - 1; p >= 0; p--) {
 				hideItems(prioritySortedItemEls[p]);
 				if ((getVisibleContentWidth() + moreWidth) <= rootEl.clientWidth) {
 					showEl(moreEl);
@@ -140,7 +138,7 @@ function SquishyList(rootEl, opts) {
 	}
 
 	function destroy() {
-		for (var c = 0, l = allItemEls.length; c < l; c++) {
+		for (let c = 0, l = allItemEls.length; c < l; c++) {
 			allItemEls[c].removeAttribute('aria-hidden');
 		}
 		window.removeEventListener('resize', resizeHandler, false);
@@ -177,5 +175,3 @@ function SquishyList(rootEl, opts) {
 	dispatchCustomEvent('oSquishyList.ready');
 
 }
-
-module.exports = SquishyList;

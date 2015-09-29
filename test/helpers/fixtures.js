@@ -1,5 +1,4 @@
-"use strict";
-var sandboxEl;
+let sandboxEl;
 
 function createSandbox() {
 	if (document.querySelector('.sandbox')) {
@@ -21,7 +20,7 @@ function insert(html) {
 }
 
 function getStyles() {
-	let styles = `
+	const styles = `
 		<style>
 			ul {
 				margin: 0;
@@ -45,7 +44,7 @@ function getStyles() {
 }
 
 function insertWithoutMore() {
-	let html = `<ul>
+	const html = `<ul>
 			<li data-priority="2">P2</li>
 			<li data-priority="1">P1</li>
 			<li data-priority="3">P3</li>
@@ -60,7 +59,7 @@ function insertWithoutMore() {
 }
 
 function insertWithMore() {
-	let html = `
+	const html = `
 		<ul>
 			<li data-priority="2">P2</li>
 			<li data-priority="1">P1</li>

@@ -1,8 +1,7 @@
-/*global describe,beforeEach,afterEach,it,expect*/
-"use strict";
+/*global require,describe,beforeEach,afterEach,it,expect*/
 
 import * as fixtures from './helpers/fixtures.js';
-import SquishyList from './../main.js';
+import SquishyList from './../main';
 
 let testPCF;
 let pcfEl;

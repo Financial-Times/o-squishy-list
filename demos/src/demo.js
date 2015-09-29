@@ -1,10 +1,9 @@
 /*global require*/
-"use strict";
 
-var SquishyList = require('./../../main');
+import SquishyList from './../../main';
 
-var els = document.querySelectorAll('.drop-off');
+const els = document.querySelectorAll('.drop-off');
 
-for (var c = 0, l = els.length; c < l; c++) {
+for (let c = 0, l = els.length; c < l; c++) {
 	new SquishyList(els[c]);
 }
