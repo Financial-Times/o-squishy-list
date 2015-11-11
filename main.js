@@ -116,13 +116,13 @@ function SquishyList(rootEl, opts) {
     }
 
     function squish() {
-        let previousHidden = getHiddenItems();
-        let previousRemaining = getRemainingItems();
+        var previousHidden = getHiddenItems();
+        var previousRemaining = getRemainingItems();
         showAllItems();
         if (doesContentFit()) {
             hideEl(moreEl);
         } else {
-            for (let p = prioritySortedItemEls.length - 1; p >= 0; p--) {
+            for (var p = prioritySortedItemEls.length - 1; p >= 0; p--) {
                 hideItems(prioritySortedItemEls[p]);
                 if ((getVisibleContentWidth() + moreWidth) <= rootEl.clientWidth) {
                     showEl(moreEl);
@@ -130,10 +130,10 @@ function SquishyList(rootEl, opts) {
                 }
             }
         }
-        let hiddenItems = getHiddenItems();
-        let remainingItems = getRemainingItems();
-        let hiddenChanged = (previousHidden && previousHidden.length !== hiddenItems.length);
-        let remainingChanged = (previousRemaining && previousRemaining.length !== remainingItems.length);
+        var hiddenItems = getHiddenItems();
+        var remainingItems = getRemainingItems();
+        var hiddenChanged = (previousHidden && previousHidden.length !== hiddenItems.length);
+        var remainingChanged = (previousRemaining && previousRemaining.length !== remainingItems.length);
         if (!previousHidden || hiddenChanged || remainingChanged) {
             dispatchCustomEvent('oSquishyList.change', {
                 hiddenItems: hiddenItems,
