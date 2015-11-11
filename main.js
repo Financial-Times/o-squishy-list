@@ -109,30 +109,38 @@ function SquishyList(rootEl, opts) {
 		return hiddenItemEls;
 	}
 
-	function getRemainingItems() {
-		return allItemEls.filter(function(el) {
-			return hiddenItemEls.indexOf(el) === -1;
-		});
-	}
+    function getRemainingItems() {
+        return allItemEls.filter(function(el) {
+            return (hiddenItemEls && hiddenItemEls.indexOf(el) === -1);
+        });
+    }
 
-	function squish() {
-		showAllItems();
-		if (doesContentFit()) {
-			hideEl(moreEl);
-		} else {
-			for (var p = prioritySortedItemEls.length - 1; p >= 0; p--) {
-				hideItems(prioritySortedItemEls[p]);
-				if ((getVisibleContentWidth() + moreWidth) <= rootEl.clientWidth) {
-					showEl(moreEl);
-					break;
-				}
-			}
-		}
-		dispatchCustomEvent('oSquishyList.change', {
-			hiddenItems: getHiddenItems(),
-			remainingItems: getRemainingItems()
-		});
-	}
+    function squish() {
+        let previousHidden = getHiddenItems();
+        let previousRemaining = getRemainingItems();
+        showAllItems();
+        if (doesContentFit()) {
+            hideEl(moreEl);
+        } else {
+            for (let p = prioritySortedItemEls.length - 1; p >= 0; p--) {
+                hideItems(prioritySortedItemEls[p]);
+                if ((getVisibleContentWidth() + moreWidth) <= rootEl.clientWidth) {
+                    showEl(moreEl);
+                    break;
+                }
+            }
+        }
+        let hiddenItems = getHiddenItems();
+        let remainingItems = getRemainingItems();
+        let hiddenChanged = (previousHidden && previousHidden.length !== hiddenItems.length);
+        let remainingChanged = (previousRemaining && previousRemaining.length !== remainingItems.length);
+        if (!previousHidden || hiddenChanged || remainingChanged) {
+            dispatchCustomEvent('oSquishyList.change', {
+                hiddenItems: hiddenItems,
+                remainingItems: remainingItems
+            });
+        }
+    }
 
 	function resizeHandler() {
 		clearTimeout(debounceTimeout);

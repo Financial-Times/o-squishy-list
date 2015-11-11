@@ -186,4 +186,33 @@ describe("o-squishy-list behaviour without More", () => {
 
 	});
 
+    describe("Events not fired", () => {
+        let handlerSpy;
+
+        beforeEach(() => {
+            // reset so we can start from fresh to ensure that the first change event fires
+            testPCF.destroy();
+            fixtures.reset();
+
+            handlerSpy = jasmine.createSpy('handlerSpy')
+            document.body.addEventListener('oSquishyList.change', handlerSpy, false);
+
+            fixtures.insertWithoutMore();
+            pcfEl = document.querySelector('ul');
+            testPCF = new SquishyList(pcfEl);
+        });
+
+        afterEach(() => {
+            document.body.removeEventListener('oSquishyList.change', handlerSpy, false);
+        });
+
+        it("when squish is called without a change to the items", () => {
+            testPCF.squish();
+            expect(handlerSpy).toHaveBeenCalled();
+            handlerSpy.calls.reset();
+            testPCF.squish();
+            expect(handlerSpy).not.toHaveBeenCalled();
+        });
+    });
+
 });
