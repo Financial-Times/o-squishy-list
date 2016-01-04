@@ -133,6 +133,6 @@ document.getElementsByTagName('ul')[0].addEventListener('oSquishyList.change', f
 
 ## License
 
-Copyright (c) 2015 Financial Times Ltd. All rights reserved.
+Copyright (c) 2016 Financial Times Ltd. All rights reserved.
 
 This software is published under the [MIT licence](http://opensource.org/licenses/MIT).
