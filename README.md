@@ -1,4 +1,4 @@
-# o-squishy-list [![Build Status](https://travis-ci.org/Financial-Times/o-squishy-list.png?branch=master)](https://travis-ci.org/Financial-Times/o-squishy-list)
+# o-squishy-list [![Build Status](https://circleci.com/gh/Financial-Times/o-squishy-list.png?style=shield&circle-token=ee4f1c6916b8eccede740336aca671173da8f2b5)](https://circleci.com/gh/Financial-Times/o-squishy-list)
 
 Hides lowest priority items when space does not allow.
 
