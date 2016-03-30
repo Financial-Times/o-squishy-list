@@ -1,28 +1,34 @@
 {
-    "description": "A horizontal list of elements that 'squishes' down, lowest priority first.",
-    "origamiType": "module",
-    "origamiVersion": 1,
-    "support": "https://github.com/Financial-Times/o-squishy-list/issues",
-    "supportStatus": "active",
-    "browserFeatures": {
-        "required": [
-            "createevent"
-        ],
-        "optional": []
-    },
-    "ci": {
-        "travis": "https://api.travis-ci.org/repos/Financial-Times/o-squishy-list/builds.json"
-    },
-    "demos": [
-        {
-            "path": "/demos/without-more.html",
-            "expanded": true,
-            "description": ""
-        },
-        {
-            "path": "/demos/with-more.html",
-            "expanded": true,
-            "description": ""
-        }
-    ]
+	"description": "A horizontal list of elements that 'squishes' down, lowest priority first.",
+	"origamiType": "module",
+	"origamiVersion": 1,
+	"support": "https://github.com/Financial-Times/o-squishy-list/issues",
+	"supportStatus": "active",
+	"browserFeatures": {
+		"required": [
+				"createevent"
+		],
+		"optional": []
+	},
+	"ci": {
+		"circle": "https://circleci.com/api/v1/project/Financial-Times/o-squishy-list"
+	},
+	"demosDefaults": {
+		"sass": "demos/src/demo.scss",
+		"js": "demos/src/demo.js"
+	},
+	"demos": [
+		{
+			"name": "without-more",
+			"template": "demos/src/without-more.mustache",
+			"expanded": true,
+			"description": ""
+		},
+		{
+			"name": "with-more",
+			"template": "demos/src/with-more.mustache",
+			"expanded": true,
+			"description": ""
+		}
+	]
 }
