@@ -64,6 +64,8 @@ If you need to hide a list item manually via CSS or JS, you need to add the data
 
 The root element should have minimum and maximum widths set.
 
+Items are hidden using `aria-hidden=true`. Adding `[aria-hidden="true"] { display: none; }` to your CSS will ensure your nav items appear and disappear as expected.
+
 In order to calculate the total width required, items must be set to `display: inline-block` or `float: left`.
 
 ### Primary and core experience
