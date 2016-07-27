@@ -1,6 +1,7 @@
 {
 	"description": "A horizontal list of elements that 'squishes' down, lowest priority first.",
 	"origamiType": "module",
+	"origamiCategory": "components",
 	"origamiVersion": 1,
 	"support": "https://github.com/Financial-Times/o-squishy-list/issues",
 	"supportStatus": "active",
