@@ -1,9 +1,11 @@
 /*global require*/
 
-import SquishyList from './../../main';
+import SquishyList from './../../main'; // eslint-disable-line no-unused-vars
 
-const els = document.querySelectorAll('.drop-off');
+function initDemos() {
+		document.addEventListener("DOMContentLoaded", function() {
+			document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
+		});
+	}
 
-for (let c = 0, l = els.length; c < l; c++) {
-	new SquishyList(els[c]);
-}
+initDemos();
