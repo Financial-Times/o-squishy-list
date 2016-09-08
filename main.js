@@ -1,30 +1,60 @@
-export default function SquishyList(rootEl, opts) {
+export default
+class SquishyList {
+	constructor(rootEl, opts){
+		this.element = rootEl;
+		this.allItemEls;
+		this.prioritySortedItemEls;
+		this.hiddenItemEls;
+		this.moreEl;
+		this.moreWidth = 0;
+		this.debounceTimeout;
+		this.options = opts || { filterOnResize: true };
 
-	let allItemEls;
-	let prioritySortedItemEls;
-	let hiddenItemEls;
-	let moreEl;
-	let moreWidth = 0;
-	let debounceTimeout;
-	const options = opts || { filterOnResize: true };
+		this.getPrioritySortedChildNodeEls();
+		this.moreEl = this.element.querySelector('[data-more]');
+		if (this.moreEl) {
+			this.showEl(this.moreEl);
+			this.moreWidth = this.moreEl.offsetWidth;
+			this.hideEl(this.moreEl);
+		}
+		this.squish();
+		if (this.options.filterOnResize) {
+			window.addEventListener('resize', this.resizeHandler.bind(this), false);
+		}
 
-	function dispatchCustomEvent(name, data) {
-		if (document.createEvent && rootEl.dispatchEvent) {
+		this.dispatchCustomEvent('oSquishyList.ready');
+	}
+
+	static init(el, opts) {
+		if (!el) {
+			el = document.body;
+		}
+		if (!(el instanceof HTMLElement)) {
+			el = document.querySelector(el);
+		}
+		if (/\bo-squishy-list\b/.test(el.getAttribute('data-o-component'))) {
+			return new SquishyList(el, opts);
+		}
+		return [].map.call(el.querySelectorAll('[data-o-component="o-squishy-list"]'), el => new SquishyList(el, opts));
+	}
+
+	dispatchCustomEvent(name, data) {
+		if (document.createEvent && this.element.dispatchEvent) {
 			const event = document.createEvent('Event');
 			event.initEvent(name, true, true);
 			if (data) {
 				event.detail = data;
 			}
-			rootEl.dispatchEvent(event);
+			this.element.dispatchEvent(event);
 		}
 	}
 
-	function getItemEls() {
+	getItemEls() {
 		const itemEls = [];
 		let childNodeEl;
 
-		for (let c = 0, l = rootEl.childNodes.length; c < l; c++) {
-			childNodeEl = rootEl.childNodes[c];
+		for (let c = 0, l = this.element.childNodes.length; c < l; c++) {
+			childNodeEl = this.element.childNodes[c];
 
 			// Make it flexible so that other product and modules can manually hide elements and o-squishy-list won't add it to it's list
 			if (childNodeEl.nodeType === 1 && !childNodeEl.hasAttribute('data-more') && !childNodeEl.hasAttribute('data-o-squishy-list--ignore')) {
@@ -34,144 +64,124 @@ export default function SquishyList(rootEl, opts) {
 		return itemEls;
 	}
 
-	function showEl(el) {
+	showEl(el) {
 		if (el) {
 			el.removeAttribute('aria-hidden');
 		}
 	}
 
-	function hideEl(el) {
+	hideEl(el) {
 		if (el) {
 			el.setAttribute('aria-hidden', 'true');
 		}
 	}
 
-	function getElPriority(el) {
+	getElPriority(el) {
 		return parseInt(el.getAttribute('data-priority'), 10);
 	}
 
-	function getPrioritySortedChildNodeEls() {
-		allItemEls = getItemEls();
-		prioritySortedItemEls = [];
+	getPrioritySortedChildNodeEls() {
+		this.allItemEls = this.getItemEls();
+		this.prioritySortedItemEls = [];
 		const unprioritisedItemEls = [];
-		for (let c = 0, l = allItemEls.length; c < l; c++) {
-			const thisItemEl = allItemEls[c];
-			const thisItemPriority = getElPriority(thisItemEl);
+		for (let c = 0, l = this.allItemEls.length; c < l; c++) {
+			const thisItemEl = this.allItemEls[c];
+			const thisItemPriority = this.getElPriority(thisItemEl);
 			if (isNaN(thisItemPriority)) {
 				unprioritisedItemEls.push(thisItemEl);
 			} else if (thisItemPriority >= 0) {
-				if (!Array.isArray(prioritySortedItemEls[thisItemPriority])) {
-					prioritySortedItemEls[thisItemPriority] = [];
+				if (!Array.isArray(this.prioritySortedItemEls[thisItemPriority])) {
+					this.prioritySortedItemEls[thisItemPriority] = [];
 				}
-				prioritySortedItemEls[thisItemPriority].push(thisItemEl);
+				this.prioritySortedItemEls[thisItemPriority].push(thisItemEl);
 			}
 		}
 		if (unprioritisedItemEls.length > 0) {
-			prioritySortedItemEls.push(unprioritisedItemEls);
+			this.prioritySortedItemEls.push(unprioritisedItemEls);
 		}
-		prioritySortedItemEls = prioritySortedItemEls.filter(function(v) {
+		this.prioritySortedItemEls = this.prioritySortedItemEls.filter(function(v) {
 			return v !== undefined;
 		});
 	}
 
-	function showAllItems() {
-		hiddenItemEls = [];
-		for (let c = 0, l = allItemEls.length; c < l; c++) {
-			showEl(allItemEls[c]);
+	showAllItems() {
+		this.hiddenItemEls = [];
+		for (let c = 0, l = this.allItemEls.length; c < l; c++) {
+			this.showEl(this.allItemEls[c]);
 		}
 	}
 
-	function hideItems(els) {
+	hideItems(els) {
 		// We want highest priority items to be at the beginning of the array
 		for (let i = els.length - 1; i > -1; i--) {
-			hiddenItemEls.unshift(els[i]);
-			hideEl(els[i]);
+			this.hiddenItemEls.unshift(els[i]);
+			this.hideEl(els[i]);
 		}
 	}
 
-	function getVisibleContentWidth() {
+	getVisibleContentWidth() {
 		let visibleItemsWidth = 0;
-		for (let c = 0, l = allItemEls.length; c < l; c++) {
-			if (!allItemEls[c].hasAttribute('aria-hidden')) {
-				visibleItemsWidth += allItemEls[c].offsetWidth; // Needs to take into account margins too
+		for (let c = 0, l = this.allItemEls.length; c < l; c++) {
+			if (!this.allItemEls[c].hasAttribute('aria-hidden')) {
+				visibleItemsWidth += this.allItemEls[c].offsetWidth; // Needs to take into account margins too
 			}
 		}
 		return visibleItemsWidth;
 	}
 
-	function doesContentFit() {
-		return getVisibleContentWidth() <= rootEl.clientWidth;
+	doesContentFit() {
+		return this.getVisibleContentWidth() <= this.element.clientWidth;
 	}
 
-	function getHiddenItems() {
-		return hiddenItemEls;
+	getHiddenItems() {
+		return this.hiddenItemEls;
 	}
 
-	function getRemainingItems() {
-		return allItemEls.filter(function(el) {
-			return hiddenItemEls.indexOf(el) === -1;
+	getRemainingItems() {
+		return this.allItemEls.filter((el) => {
+			return this.hiddenItemEls.indexOf(el) === -1;
 		});
 	}
 
-	function squish() {
-		showAllItems();
-		if (doesContentFit()) {
-			hideEl(moreEl);
+	squish() {
+		this.showAllItems();
+		if (this.doesContentFit()) {
+			this.hideEl(this.moreEl);
 		} else {
-			for (let p = prioritySortedItemEls.length - 1; p >= 0; p--) {
-				hideItems(prioritySortedItemEls[p]);
-				if ((getVisibleContentWidth() + moreWidth) <= rootEl.clientWidth) {
-					showEl(moreEl);
+			for (let p = this.prioritySortedItemEls.length - 1; p >= 0; p--) {
+				this.hideItems(this.prioritySortedItemEls[p]);
+				if ((this.getVisibleContentWidth() + this.moreWidth) <= this.element.clientWidth) {
+					this.showEl(this.moreEl);
 					break;
 				}
 			}
 		}
-		dispatchCustomEvent('oSquishyList.change', {
-			hiddenItems: getHiddenItems(),
-			remainingItems: getRemainingItems()
+		this.dispatchCustomEvent('oSquishyList.change', {
+			hiddenItems: this.getHiddenItems(),
+			remainingItems: this.getRemainingItems()
 		});
 	}
 
-	function resizeHandler() {
-		clearTimeout(debounceTimeout);
-		debounceTimeout = setTimeout(squish, 50);
+	resizeHandler() {
+		clearTimeout(this.debounceTimeout);
+		this.debounceTimeout = setTimeout(this.squish.bind(this), 50);
 	}
 
-	function destroy() {
-		for (let c = 0, l = allItemEls.length; c < l; c++) {
-			allItemEls[c].removeAttribute('aria-hidden');
+	destroy() {
+		for (let c = 0, l = this.allItemEls.length; c < l; c++) {
+			this.allItemEls[c].removeAttribute('aria-hidden');
 		}
-		window.removeEventListener('resize', resizeHandler, false);
-		rootEl.removeAttribute('data-o-squishy-list-js');
+		window.removeEventListener('resize', this.resizeHandler, false);
+		this.element.removeAttribute('data-o-squishy-list-js');
 	}
 
-	function init() {
-		if (!rootEl) {
-			rootEl = document.body;
-		} else if (!(rootEl instanceof HTMLElement)) {
-			rootEl = document.querySelector(rootEl);
-		}
-		rootEl.setAttribute('data-o-squishy-list-js', '');
-		getPrioritySortedChildNodeEls();
-		moreEl = rootEl.querySelector('[data-more]');
-		if (moreEl) {
-			showEl(moreEl);
-			moreWidth = moreEl.offsetWidth;
-			hideEl(moreEl);
-		}
-		squish();
-		if (options.filterOnResize) {
-			window.addEventListener('resize', resizeHandler, false);
-		}
-	}
+}
 
-	init();
+const constructAll = function() {
+	SquishyList.init();
+	document.removeEventListener('o.DOMContentLoaded', constructAll);
+};
 
-	this.getHiddenItems = getHiddenItems;
-	this.getRemainingItems = getRemainingItems;
-	this.squish = squish;
-	this.destroy = destroy;
-
-	dispatchCustomEvent('oSquishyList.ready');
-
+if (typeof window !== 'undefined') {
+	document.addEventListener('o.DOMContentLoaded', constructAll);
 }

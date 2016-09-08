@@ -22,13 +22,11 @@
 		{
 			"name": "without-more",
 			"template": "demos/src/without-more.mustache",
-			"expanded": true,
 			"description": ""
 		},
 		{
 			"name": "with-more",
 			"template": "demos/src/with-more.mustache",
-			"expanded": true,
 			"description": ""
 		}
 	]

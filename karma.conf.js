@@ -20,7 +20,7 @@ module.exports = function(config) {
 			'karma-phantomjs-launcher',
 			'karma-webpack'
 		],
-		
+
 
 		// list of files / patterns to load in the browser
 		files: [
