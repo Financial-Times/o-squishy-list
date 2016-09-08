@@ -38,7 +38,7 @@ class SquishyList {
 		return [].map.call(el.querySelectorAll('[data-o-component="o-squishy-list"]'), el => new SquishyList(el, opts));
 	}
 
-	 dispatchCustomEvent(name, data) {
+	dispatchCustomEvent(name, data) {
 		if (document.createEvent && this.element.dispatchEvent) {
 			const event = document.createEvent('Event');
 			event.initEvent(name, true, true);
@@ -49,7 +49,7 @@ class SquishyList {
 		}
 	}
 
-	 getItemEls() {
+	getItemEls() {
 		const itemEls = [];
 		let childNodeEl;
 
