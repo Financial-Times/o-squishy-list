@@ -28,6 +28,12 @@
 			"name": "with-more",
 			"template": "demos/src/with-more.mustache",
 			"description": ""
+		},
+		{
+			"name": "pa11y",
+			"hidden": true,
+			"template": "demos/src/pa11y.mustache",
+			"description": ""
 		}
 	]
 }
