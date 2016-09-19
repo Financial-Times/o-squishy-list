@@ -1,8 +1,9 @@
 {
-    "name": "o-squishy-list",
-    "main": [
-        "main.js"
-    ],
-    "dependencies": {
-    }
+  "name": "o-squishy-list",
+  "main": [
+    "main.js"
+  ],
+  "dependencies": {
+    "o-viewport": "^3.0.1"
+  }
 }

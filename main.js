@@ -1,3 +1,5 @@
+const oViewport = require('o-viewport');
+
 export default
 class SquishyList {
 	constructor(rootEl, opts){
@@ -17,9 +19,12 @@ class SquishyList {
 			this.moreWidth = this.moreEl.offsetWidth;
 			this.hideEl(this.moreEl);
 		}
+
 		this.squish();
+
 		if (this.options.filterOnResize) {
-			window.addEventListener('resize', this.resizeHandler.bind(this), false);
+			oViewport.listenTo('resize');
+			document.body.addEventListener('oViewport.resize', this.squish.bind(this), false);
 		}
 
 		this.dispatchCustomEvent('oSquishyList.ready');
@@ -162,16 +167,11 @@ class SquishyList {
 		});
 	}
 
-	resizeHandler() {
-		clearTimeout(this.debounceTimeout);
-		this.debounceTimeout = setTimeout(this.squish.bind(this), 50);
-	}
-
 	destroy() {
 		for (let c = 0, l = this.allItemEls.length; c < l; c++) {
 			this.allItemEls[c].removeAttribute('aria-hidden');
 		}
-		window.removeEventListener('resize', this.resizeHandler, false);
+		document.body.removeEventListener('oViewport.resize', this.squish);
 		this.element.removeAttribute('data-o-squishy-list-js');
 	}
 
