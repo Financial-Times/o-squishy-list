@@ -33,16 +33,17 @@
 	}
 
 	[data-priority='2'] {
-		background-color: #999999;
+		background-color: #767676;
 	}
 
 	[data-priority='1'] {
 		background-color: #bbbbbb;
+		color: #4b4b4b;
 	}
 
 	[data-priority='-1'] {
 		background-color: #dddddd;
-		color: #888888;
+		color: #616161;
 	}
 
 	[data-more] {
