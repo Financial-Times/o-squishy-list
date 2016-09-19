@@ -76,7 +76,7 @@ describe("o-squishy-list autoinitialization", () => {
 	it("should resize when the window width changes", (done) => {
 		fixtures.reset();
 		SquishyList.init(pcfEl, { filterOnResize: true });
-		const event = new CustomEvent('resize', {});
+		const event = new CustomEvent('oViewport.resize', {});
 		document.dispatchEvent(event);
 		pcfEl.addEventListener('oSquishyList.change', function() {
 			expect(true).toBe(true);

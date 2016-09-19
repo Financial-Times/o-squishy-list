@@ -1,5 +1,9 @@
 /*global module*/
 
+const BowerPlugin = require('bower-webpack-plugin');
+const path = require('path');
+const cwd = process.cwd();
+
 // Karma configuration
 // Generated on Mon Apr 14 2014 12:27:18 GMT+0100 (BST)
 
@@ -85,7 +89,15 @@ module.exports = function(config) {
 						]
 					}
 				]
-			}
+			},
+			resolve: {
+				root: [path.join(cwd, 'bower_components')]
+			},
+			plugins: [
+				new BowerPlugin({
+					includes:  /\.js$/
+				})
+			]
 		},
 
 		// Hide webpack output logging

@@ -24,7 +24,7 @@ class SquishyList {
 
 		if (this.options.filterOnResize) {
 			oViewport.listenTo('resize');
-			document.body.addEventListener('oViewport.resize', this.squish.bind(this), false);
+			document.body.addEventListener('oViewport.resize', this.squish.bind(this));
 		}
 
 		this.dispatchCustomEvent('oSquishyList.ready');
