@@ -1,4 +1,4 @@
-/*global module*/
+/*global module, process*/
 
 // Karma configuration
 // Generated on Mon Apr 14 2014 12:27:18 GMT+0100 (BST)

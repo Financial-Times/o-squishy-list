@@ -1,4 +1,4 @@
-/*global require,describe,beforeEach,afterEach,it,expect*/
+/*global require,describe,beforeEach,afterEach,it*/
 
 import proclaim from 'proclaim';
 

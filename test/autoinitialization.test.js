@@ -1,3 +1,5 @@
+/*global require,describe,beforeEach,afterEach,it*/
+
 import proclaim from 'proclaim';
 import sinon from 'sinon/pkg/sinon';
 
