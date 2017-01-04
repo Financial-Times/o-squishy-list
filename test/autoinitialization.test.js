@@ -1,5 +1,3 @@
-/* eslint-env mocha, jasmine */
-
 import proclaim from 'proclaim';
 import sinon from 'sinon/pkg/sinon';
 
