@@ -1,11 +1,9 @@
-/*global require*/
-
 import SquishyList from './../../main'; // eslint-disable-line no-unused-vars
 
 function initDemos() {
-		document.addEventListener("DOMContentLoaded", function() {
-			document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
-		});
-	}
+	document.addEventListener("DOMContentLoaded", function() {
+		document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
+	});
+}
 
 initDemos();
