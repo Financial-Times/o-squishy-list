@@ -81,7 +81,7 @@ describe("o-squishy-list autoinitialization", () => {
 		fixtures.reset();
 		SquishyList.init(pcfEl, { filterOnResize: true });
 		const event = new CustomEvent('resize', {});
-		document.dispatchEvent(event);
+		window.dispatchEvent(event);
 
 		// Adds an event listener to test that the callback has
 		// been triggered. If done() is not reached, test will fail
