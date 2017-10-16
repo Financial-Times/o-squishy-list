@@ -2,11 +2,21 @@
 
 Hides lowest priority items when space does not allow.
 
-## Construction
+- [Usage](#usage)
+	- [Markup](#markup)
+	- [Sass](#sass)
+	- [JavaScript](#javascript)
+- [Contact](#contact)
+- [Licence](#licence)
+
+
+## Usage
+
+### Markup
 
 Given a root HTML element, __o-squishy-list__ will assume each immediate element child is a _content item_.
 
-## Declaring content item priorities
+#### Declaring content item priorities
 
 The _content items_ should be given a `data-priority` attribute containing a positive integer to indicate its priority with regard to display. The lower the number the higher the priority. Low-priority items will be hidden first, high-priority items will be hidden last.
 
@@ -29,7 +39,7 @@ An example with four items using three levels of priority (the last item will be
 
 Sometimes you might want a particular content item to never be hidden. You can do this by setting its priority to `-1` to remove it from the priorities list.
 
-### More
+#### More
 
 If some cases you might want a 'more' item which will only show when content has been hidden due to insufficient space. Simply add another `<li>` with a `data-more` attribute. It should also have a `aria-hidden="true"` attribute:
 
@@ -47,7 +57,7 @@ When a _More_ item element is present, sufficient _content items_ will be hidden
 
 The __More__ item will not be hidden, even if there is not sufficient space for it to show.
 
-### Hiding items manually
+#### Hiding items manually
 
 If you need to hide a list item manually via CSS or JS, you need to add the data-attribute `data-o-squishy-list--ignore` to that item. This way, `o-squishy-list` will stop adding that item to its item list.
 
@@ -60,7 +70,7 @@ If you need to hide a list item manually via CSS or JS, you need to add the data
 </ul>
 ```
 
-## Styling
+## Sass
 
 The root element should have minimum and maximum widths set.
 
@@ -82,9 +92,9 @@ nav li:not([data-priority='1']) {
 }
 ```
 
-## Javascript
+### Javascript
 
-### Construction
+#### Construction
 
 No code will run automatically.
 
@@ -100,14 +110,14 @@ A optional second argument can be passed, containing a configuration object, wit
 
 * `filterOnResize` (boolean, default `true`) - if `true` will listen for the `window.resize` event and automatically call `.squish()`
 
-### Methods
+#### Methods
 
 * `squish()` Hide items of lowest priority that don't currently fit into the available width.
 * `getHiddenItems()` Returns a list of the currently hidden item elements.
 * `getRemainingItems()` Returns a list of the currently remaining item elements.
 * `destroy()` Unbind events, un-hide items etc.
 
-### Events
+#### Events
 
 This module will dispatch the following events on its root element:
 
@@ -131,10 +141,14 @@ document.getElementsByTagName('ul')[0].addEventListener('oSquishyList.change', f
 }, false);
 ```
 
+---
+
+## Contact
+
+If you have any questions or comments about this component, or need help using it, please either [raise an issue](https://github.com/Financial-Times/o-squishy-list/issues), visit [#ft-origami](https://financialtimes.slack.com/messages/ft-origami/) or email [Origami Support](mailto:origami-support@ft.com).
+
 ----
 
-## License
+## Licence
 
-Copyright (c) 2016 Financial Times Ltd. All rights reserved.
-
-This software is published under the [MIT licence](http://opensource.org/licenses/MIT).
+This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).

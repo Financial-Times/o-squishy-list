@@ -4,12 +4,7 @@ export default
 class SquishyList {
 	constructor(rootEl, opts){
 		this.element = rootEl;
-		this.allItemEls;
-		this.prioritySortedItemEls;
-		this.hiddenItemEls;
-		this.moreEl;
 		this.moreWidth = 0;
-		this.debounceTimeout;
 		this.options = opts || { filterOnResize: true };
 
 		this.getPrioritySortedChildNodeEls();
@@ -69,19 +64,19 @@ class SquishyList {
 		return itemEls;
 	}
 
-	showEl(el) {
+	showEl(el) { // eslint-disable-line class-methods-use-this
 		if (el) {
 			el.removeAttribute('aria-hidden');
 		}
 	}
 
-	hideEl(el) {
+	hideEl(el) { // eslint-disable-line class-methods-use-this
 		if (el) {
 			el.setAttribute('aria-hidden', 'true');
 		}
 	}
 
-	getElPriority(el) {
+	getElPriority(el) { // eslint-disable-line class-methods-use-this
 		return parseInt(el.getAttribute('data-priority'), 10);
 	}
 
