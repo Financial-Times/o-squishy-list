@@ -59,7 +59,6 @@ describe("o-squishy-list autoinitialization", () => {
 	});
 
 	it("should create several SquishyLists inside certain html element", () => {
-		fixtures.reset();
 		fixtures.insertWithAndWithoutMore();
 		pcfEl = document.querySelector('.sandbox');
 		const squishy = SquishyList.init(pcfEl);
@@ -69,7 +68,6 @@ describe("o-squishy-list autoinitialization", () => {
 	});
 
 	it("should create several SquishyLists using a css selector", () => {
-		fixtures.reset();
 		fixtures.insertWithAndWithoutMore();
 		const squishy = SquishyList.init('.sandbox');
 		proclaim.lengthEquals(squishy, 2);
@@ -78,14 +76,15 @@ describe("o-squishy-list autoinitialization", () => {
 	});
 
 	it("should resize when the window width changes", (done) => {
-		fixtures.reset();
-		SquishyList.init(pcfEl, { filterOnResize: true });
-		const event = new CustomEvent('oViewport.resize', {});
-		document.dispatchEvent(event);
+		pcfEl.addEventListener('oSquishyList.ready', function() {
+			const event = new CustomEvent('oViewport.resize', {});
+			document.dispatchEvent(event);
+		})
 		// Adds an event listener to test that the callback has
 		// been triggered. If done() is not reached, test will fail
 		pcfEl.addEventListener('oSquishyList.change', function() {
 			done();
 		});
+		const squishy = new SquishyList(pcfEl, { filterOnResize: true });
 	});
 });
