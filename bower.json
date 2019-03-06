@@ -4,6 +4,6 @@
     "main.js"
   ],
   "dependencies": {
-    "o-viewport": "^3.0.1"
+    "o-viewport": "^3.3.0"
   }
 }
