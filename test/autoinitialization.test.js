@@ -79,12 +79,12 @@ describe("o-squishy-list autoinitialization", () => {
 		pcfEl.addEventListener('oSquishyList.ready', function() {
 			const event = new CustomEvent('oViewport.resize', {});
 			document.dispatchEvent(event);
-		})
+		});
 		// Adds an event listener to test that the callback has
 		// been triggered. If done() is not reached, test will fail
 		pcfEl.addEventListener('oSquishyList.change', function() {
 			done();
 		});
-		const squishy = new SquishyList(pcfEl, { filterOnResize: true });
+		new SquishyList(pcfEl, { filterOnResize: true });
 	});
 });
