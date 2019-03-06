@@ -4,10 +4,14 @@
 	"origamiCategory": "components",
 	"origamiVersion": 1,
 	"support": "https://github.com/Financial-Times/o-squishy-list/issues",
+	"supportContact": {
+		"email": "origami.support@ft.com",
+		"slack": "financialtimes/ft-origami"
+	},
 	"supportStatus": "active",
 	"browserFeatures": {
 		"required": [
-				"createevent"
+			"createevent"
 		],
 		"optional": []
 	},
@@ -20,16 +24,19 @@
 	},
 	"demos": [
 		{
+			"title": "Without More",
 			"name": "without-more",
 			"template": "demos/src/without-more.mustache",
 			"description": ""
 		},
 		{
+			"title": "With More",
 			"name": "with-more",
 			"template": "demos/src/with-more.mustache",
 			"description": ""
 		},
 		{
+			"title": "Pa11y",
 			"name": "pa11y",
 			"hidden": true,
 			"template": "demos/src/pa11y.mustache",

@@ -1,4 +1,4 @@
-# o-squishy-list [![Build Status](https://circleci.com/gh/Financial-Times/o-squishy-list.png?style=shield&circle-token=ee4f1c6916b8eccede740336aca671173da8f2b5)](https://circleci.com/gh/Financial-Times/o-squishy-list)
+# o-squishy-list [![Build Status](https://circleci.com/gh/Financial-Times/o-squishy-list.png?style=shield&circle-token=ee4f1c6916b8eccede740336aca671173da8f2b5)](https://circleci.com/gh/Financial-Times/o-squishy-list) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 
 Hides lowest priority items when space does not allow.
 
