@@ -3,7 +3,7 @@
 import proclaim from 'proclaim';
 
 import * as fixtures from './helpers/fixtures.js';
-import SquishyList from './../main';
+const SquishyList = require('./../main');
 
 let testPCF;
 let pcfEl;

@@ -1,5 +1,4 @@
-export default
-class SquishyList {
+export default class SquishyList {
 	constructor(rootEl, opts){
 		this.element = rootEl;
 		this.moreWidth = 0;
