@@ -1,9 +1,9 @@
 /*global require,describe,beforeEach,afterEach,it*/
 
-import proclaim from 'proclaim';
-import sinon from 'sinon/pkg/sinon';
+const proclaim = require('proclaim');
+const sinon = require('sinon/pkg/sinon');
 
-import * as fixtures from './helpers/fixtures';
+const fixtures = require('./helpers/fixtures');
 const SquishyList = require('./../main');
 
 let pcfEl;

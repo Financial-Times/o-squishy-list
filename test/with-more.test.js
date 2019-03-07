@@ -1,8 +1,8 @@
 /*global describe,beforeEach,afterEach,it*/
 
-import proclaim from 'proclaim';
+const proclaim = require('proclaim');
 
-import * as fixtures from './helpers/fixtures';
+const fixtures = require('./helpers/fixtures');
 const SquishyList = require('./../main');
 
 let testPCF;
