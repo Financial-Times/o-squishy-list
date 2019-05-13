@@ -1,5 +1,6 @@
 {
-	"description": "A horizontal list of elements that 'squishes' down, lowest priority first.",
+	"description": "Tool to compress a list of elements horizontally, hiding lower priority items first.",
+	"keywords": [ "list", "content", "minimise", "accordion" ]
 	"origamiType": "module",
 	"origamiCategory": "components",
 	"origamiVersion": 1,
