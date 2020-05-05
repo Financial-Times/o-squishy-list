@@ -1,5 +1,3 @@
-/*global describe,beforeEach,afterEach,it*/
-
 import proclaim from 'proclaim';
 
 import * as fixtures from './helpers/fixtures';
