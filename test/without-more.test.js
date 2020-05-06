@@ -1,6 +1,4 @@
-/*global require,describe,beforeEach,afterEach,it*/
-
-import proclaim from 'proclaim';
+/* global proclaim */
 
 import * as fixtures from './helpers/fixtures.js';
 import SquishyList from './../main';
