@@ -1,6 +1,4 @@
-import proclaim from 'proclaim';
-import sinon from 'sinon/pkg/sinon';
-
+/* global proclaim, sinon */
 import * as fixtures from './helpers/fixtures';
 import SquishyList from './../main';
 

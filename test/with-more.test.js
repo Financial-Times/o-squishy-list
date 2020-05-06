@@ -1,5 +1,4 @@
-import proclaim from 'proclaim';
-
+/* global proclaim */
 import * as fixtures from './helpers/fixtures';
 import SquishyList from './../main';
 
