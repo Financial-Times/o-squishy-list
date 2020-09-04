@@ -1,7 +1,7 @@
 /* global proclaim */
 
-import * as fixtures from './helpers/fixtures.js';
-import SquishyList from './../main';
+import * as fixtures from './helpers/fixtures.js.js';
+import SquishyList from './../main.js';
 
 let testPCF;
 let pcfEl;

@@ -1,4 +1,4 @@
-import SquishyList from './../../main'; // eslint-disable-line no-unused-vars
+import SquishyList from './../../main.js'; // eslint-disable-line no-unused-vars
 
 function initDemos() {
 	document.addEventListener("DOMContentLoaded", function() {
