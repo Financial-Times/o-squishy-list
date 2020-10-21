@@ -1,11 +1,16 @@
 {
-  "name": "o-squishy-list",
-  "private": true,
-  "description": "A horizontal list of elements that 'squishes' down, lowest priority first.",
-  "devDependencies": {
-    "eslint": "^7.9.0",
-    "eslint-config-origami-component": "^2.1.0",
-    "origami-ci-tools": "^2.1.0",
-    "stylelint-config-origami-component": "^1.0.4"
-  }
+    "name": "o-squishy-list",
+    "description": "Tool to compress a list of elements horizontally, hiding lower priority items first.",
+    "devDependencies": {
+        "eslint": "^7.9.0",
+        "eslint-config-origami-component": "^2.1.0",
+        "origami-ci-tools": "^2.1.0",
+        "stylelint-config-origami-component": "^1.0.4"
+    },
+    "main": "main.js",
+    "peerDependencies": {},
+    "publishConfig": {
+        "registry": "http://localhost:4873"
+    },
+    "version": "3.0.0-0"
 }

@@ -1,8 +1,0 @@
-{
-    "name": "o-squishy-list",
-    "main": [
-        "main.js"
-    ],
-    "dependencies": {
-    }
-}
