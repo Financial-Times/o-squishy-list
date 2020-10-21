@@ -1,5 +1,5 @@
 {
-    "name": "o-squishy-list",
+    "name": "@financial-times/o-squishy-list",
     "description": "Tool to compress a list of elements horizontally, hiding lower priority items first.",
     "devDependencies": {
         "eslint": "^7.9.0",
