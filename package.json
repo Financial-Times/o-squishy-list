@@ -7,7 +7,7 @@
         "origami-ci-tools": "^2.1.0",
         "stylelint-config-origami-component": "^1.0.4"
     },
-    "main": "main.js",
+    "browser": "main.js",
     "peerDependencies": {},
     "publishConfig": {
         "registry": "http://localhost:4873"
