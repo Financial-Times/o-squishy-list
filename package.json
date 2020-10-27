@@ -1,16 +1,16 @@
 {
     "name": "@financial-times/o-squishy-list",
+    "version": "100.0.0-7",
     "description": "Tool to compress a list of elements horizontally, hiding lower priority items first.",
+    "browser": "main.js",
     "devDependencies": {
         "eslint": "^7.9.0",
         "eslint-config-origami-component": "^2.1.0",
         "origami-ci-tools": "^2.1.0",
         "stylelint-config-origami-component": "^1.0.4"
     },
-    "browser": "main.js",
     "peerDependencies": {},
     "publishConfig": {
         "registry": "http://localhost:4873"
-    },
-    "version": "100.0.0-7"
+    }
 }
