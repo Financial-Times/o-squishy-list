@@ -1,6 +1,6 @@
 {
     "name": "@financial-times/o-squishy-list",
-    "version": "100.0.0-7",
+    "version": "100.0.0-8",
     "description": "Tool to compress a list of elements horizontally, hiding lower priority items first.",
     "license": "MIT",
     "type": "module",
