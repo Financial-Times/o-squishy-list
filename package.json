@@ -1,6 +1,6 @@
 {
   "name": "@financial-times/o-squishy-list",
-  "version": "100.0.0-11",
+  "version": "100.0.0-12",
   "description": "Tool to compress a list of elements horizontally, hiding lower priority items first.",
   "keywords": [],
   "homepage": "https://github.com/Financial-Times/o-squishy-list#readme",
